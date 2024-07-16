@@ -57,12 +57,17 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
+                  
+
                   <form class="row g-3" action="{{ route('user_create') }}" method="POST">
                     @csrf
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
-                      <input type="text" name="name" class="form-control" placeholder="Enter Your Name" required>
+                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Your Name">
                       <div class="invalid-feedback">Please, enter your name!</div>
+                      @error('name')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
 
                    
@@ -72,9 +77,12 @@
                       <label for="yourUsername" class="form-label">Your Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="email" class="form-control" placeholder="example@gmail.com"  required>
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="example@gmail.com">
                         <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                       </div>
+                      @error('email')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
 
                     <div class="col-12">

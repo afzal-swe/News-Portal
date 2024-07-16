@@ -33,12 +33,15 @@ class AuthController extends Controller
 
         // Attempt to authenticate the user
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // Authentication successful, retrieve the authenticated user
-            $user = Auth::user();
+
+            if (Auth::user()->status == 1) {
+                return redirect()->route('dashboard');
+            } else {
+                return redirect()->route('home_page');
+            }
         }
 
-        // Authentication failed, return error response
-        return Response(['message' => 'Email or password wrong'], 401);
+        return redirect()->back();
     }
 
     public function register_from()
@@ -77,5 +80,11 @@ class AuthController extends Controller
         // }
 
         return view('Backend.layouts.master');
+    }
+
+    public function Admin_logout()
+    {
+        Auth::logout();
+        return redirect()->to('/');
     }
 }
