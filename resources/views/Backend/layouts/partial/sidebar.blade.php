@@ -53,7 +53,7 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-general.html">
+            <a href="{{ route('Category_View') }}">
               <i class="bi bi-circle"></i><span>Category</span>
             </a>
           </li>

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\RoleUserController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubcategoryController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -52,14 +54,15 @@ Route::middleware(['auth'])->group(function () {
 
         // category Route Section Start //
         Route::group(['prefix' => 'category'], function () {
-            Route::controller(RoleUserController::class)->group(function () {
+            Route::controller(CategoryController::class)->group(function () {
                 Route::get('/view', 'Category_View')->name('Category_View');
+                Route::post('/create', 'Add_Category')->name('add_category');
             });
         });
 
         // subcategory Route Section Start //
         Route::group(['prefix' => 'subcategory'], function () {
-            Route::controller(RoleUserController::class)->group(function () {
+            Route::controller(SubcategoryController::class)->group(function () {
                 Route::get('/view', 'Subategory_View')->name('Subategory_View');
             });
         });
