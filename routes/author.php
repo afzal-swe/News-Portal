@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
                 // Route::get('/delete/{id}', 'Brand_Delete')->name('brand.delete');
             });
         });
+
         // Role Route Section Start //
         Route::group(['prefix' => 'role'], function () {
             // User Route Section
@@ -46,6 +47,20 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/view', 'Role_View')->name('role.view');
                 Route::get('/create', 'Role_Create')->name('role.create');
                 Route::post('/store', 'Role_Store')->name('role.store');
+            });
+        });
+
+        // category Route Section Start //
+        Route::group(['prefix' => 'category'], function () {
+            Route::controller(RoleUserController::class)->group(function () {
+                Route::get('/view', 'Category_View')->name('Category_View');
+            });
+        });
+
+        // subcategory Route Section Start //
+        Route::group(['prefix' => 'subcategory'], function () {
+            Route::controller(RoleUserController::class)->group(function () {
+                Route::get('/view', 'Subategory_View')->name('Subategory_View');
             });
         });
     });

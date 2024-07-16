@@ -19,6 +19,14 @@ class UserController extends Controller
         $this->db_tableUser = 'users';
     }
 
+    /**
+     * Display all users.
+     *
+     * This method retrieves all user records from the specified database table, ordered by their ID in descending order.
+     * It then passes the retrieved user data to the 'Backend.User.view_user' view for display.
+     *
+     * @return \Illuminate\View\View
+     */
     public function view_user()
     {
         $all_user = DB::table($this->db_tableUser)->orderBy('id', "DESC")->get();
@@ -26,11 +34,31 @@ class UserController extends Controller
     }
 
 
-    public function  Create_user()
+
+    /**
+     * Show the form for creating a new user.
+     *
+     * This method returns the view for creating a new user. It simply loads the 'Backend.User.create_user' view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function Create_user()
     {
         return view('Backend.User.create_user');
     }
 
+
+    /**
+     * Store a newly created user.
+     *
+     * This method handles the creation of a new user. It first validates the incoming request to ensure
+     * that all required fields are present and meet specified criteria. If validation passes, the user data
+     * is inserted into the specified database table. The password is hashed before being stored. After successful
+     * insertion, the user is redirected to the dashboard.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store_user(Request $request)
     {
         $request->validate([
@@ -43,8 +71,6 @@ class UserController extends Controller
         ]);
 
         DB::table($this->db_tableUser)->insert([
-            // User::create([
-
             'name' => $request->name,
             'user_name' => $request->user_name,
             'email' => $request->email,
@@ -54,6 +80,7 @@ class UserController extends Controller
             'parmission' => $request->parmission,
             'password' => Hash::make($request->password),
         ]);
+
         return redirect()->route('dashboard');
     }
 }

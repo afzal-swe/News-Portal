@@ -13,11 +13,31 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
+    /**
+     * Show the login form.
+     *
+     * This method returns the view for the login form. It simply loads the 'Backend.Author.login' view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function login_from()
     {
         return view('Backend.Author.login');
     }
 
+
+    /**
+     * Handle user login.
+     *
+     * This method handles the login process for a user. It first validates the incoming request data to ensure
+     * that the 'email' and 'password' fields are present and meet specified criteria. If validation fails,
+     * an error response is returned. If validation passes, it attempts to authenticate the user using the
+     * provided credentials. If authentication is successful, it checks the user's status and redirects them
+     * to the appropriate route. If authentication fails, the user is redirected back to the login page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         // Validate incoming request data
@@ -44,11 +64,23 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
+
     public function register_from()
     {
         return view('Backend.Author.register');
     }
 
+    /**
+     * Create a new user.
+     *
+     * This method handles the creation of a new user. It first validates the incoming request data to ensure
+     * that the 'name', 'email', and 'password' fields are present and meet specified criteria. If validation passes,
+     * a new user is created using the provided data, with the password being hashed before storage. The new user is
+     * assigned a default status of 0. After successful creation, the user is redirected to the admin login page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function user_create(Request $request)
     {
         // dd($request->all());
@@ -60,15 +92,15 @@ class AuthController extends Controller
         // dd($request->all());
 
         $user = User::create([
-
             'name' => $request->name,
-            // 'user_name' => $request->user_name,
             'email' => $request->email,
             'status' => 0,
             'password' => Hash::make($request->password),
         ]);
+
         return redirect()->route('admin_login');
     }
+
 
     public function Admin_dashboard()
     {

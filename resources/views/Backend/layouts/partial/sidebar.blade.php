@@ -59,7 +59,7 @@
           </li>
           <li>
             <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Subcategexory</span>
+              <i class="bi bi-circle"></i><span>Subcategory</span>
             </a>
           </li>
         </ul>
