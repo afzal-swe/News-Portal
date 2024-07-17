@@ -73,14 +73,26 @@
                   </div>
                 </div>
                 
+
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Parmission <samp class="text-danger" >*</samp> </label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile">
+                    <select name="parmission" id="" class="form-control">
+                      <option disabled selected>==Choose Parmission==</option>
+  
+                      @foreach ($parmission as $row)
+                          <option value="{{ $row->id }}">{{ $row->role_name }}</option>
+                      @endforeach
+                      
+                    </select>
                   </div>
+                  
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
+                  
+                </div> --}}
+
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-4">
@@ -95,22 +107,6 @@
                       @enderror
                     </div>
                   </div>
-  
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Parmission</label>
-                    <div class="col-sm-4">
-                      <select class="form-select @error('parmission') is-invalide @enderror" name="parmission" aria-label="Default select example">
-                        <option selected disabled>-- Select Parmission --</option>
-                        <option value="1">admin</option>
-                        <option value="2">supper admin</option>
-                      </select>
-
-                        @error('parmission')
-                          <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                  </div>
-                </div>
 
                 
 

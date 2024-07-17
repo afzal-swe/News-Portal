@@ -57,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
             Route::controller(CategoryController::class)->group(function () {
                 Route::get('/view', 'Category_View')->name('Category_View');
                 Route::post('/create', 'Add_Category')->name('add_category');
+                Route::get('/edit/{slug}', 'Edit_Category')->name('edit_category');
+                Route::post('/update/{slug}', 'Update_Category')->name('update_category');
+                Route::get('/delete/{slug}', 'Delete_Category')->name('Delete_Category');
             });
         });
 
@@ -64,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'subcategory'], function () {
             Route::controller(SubcategoryController::class)->group(function () {
                 Route::get('/view', 'Subategory_View')->name('Subategory_View');
+                Route::post('/create', 'Create_Subcategory')->name('create_sub.category');
             });
         });
     });

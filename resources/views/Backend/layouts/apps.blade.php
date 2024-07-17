@@ -9,6 +9,9 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+
+
+
   <!-- Favicons -->
   <link href="{{ asset ('Backend/assets/img/favicon.png')}}" rel="icon">
   <link href="{{ asset ('Backend/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
@@ -28,6 +31,8 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset ('Backend/assets/css/style.css')}}" rel="stylesheet">
+
+
 
 
 </head>
@@ -70,9 +75,11 @@
   <script src="{{ asset ('Backend/assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
   <script src="{{ asset ('Backend/assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{ asset ('Backend/assets/vendor/php-email-form/validate.js')}}"></script>
+ 
 
   <!-- Template Main JS File -->
   <script src="{{ asset ('Backend/assets/js/main.js')}}"></script>
+
 
 </body>
 

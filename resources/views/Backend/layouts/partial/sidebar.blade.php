@@ -58,7 +58,7 @@
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="{{ route('Subategory_View') }}">
               <i class="bi bi-circle"></i><span>Subcategory</span>
             </a>
           </li>

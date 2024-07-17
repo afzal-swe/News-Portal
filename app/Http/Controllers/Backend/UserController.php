@@ -13,10 +13,12 @@ class UserController extends Controller
     //
 
     private $db_tableUser;
+    private $db_role;
 
     public function __construct()
     {
         $this->db_tableUser = 'users';
+        $this->db_role = 'role';
     }
 
     /**
@@ -44,7 +46,9 @@ class UserController extends Controller
      */
     public function Create_user()
     {
-        return view('Backend.User.create_user');
+
+        $parmission = DB::table($this->db_role)->where('status', 1)->orderBy('id', 'DESC')->get();
+        return view('Backend.User.create_user', compact('parmission'));
     }
 
 
@@ -81,6 +85,6 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('view_user');
     }
 }

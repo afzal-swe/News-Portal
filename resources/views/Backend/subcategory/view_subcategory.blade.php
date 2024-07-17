@@ -3,7 +3,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Category Tables</h1>
+      <h1>Sub-Category Tables</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -27,20 +27,21 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Category BN</th>
-                    <th scope="col">Category EN</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Sub-Category BN</th>
+                    <th scope="col">Sub-Category EN</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @if ($category !== null)
-                  @foreach ($category as $key=>$row)
+                    @if ($sub_category !== null)
+                  @foreach ($sub_category as $key=>$row)
                     {{-- @dd($category); --}}
                   <tr>
                     <th scope="row">{{ ++$key }}</th>
-                    <td>{{ $row->category_bn ?? 'null' }}</td>
-                    <td>{{ $row->category_en ?? 'null' }}</td>
+                    <td>{{ $row->subcategory_bn ?? 'null' }}</td>
+                    <td>{{ $row->subcategory_en ?? 'null' }}</td>
                     <td>
                         @if ($row->status==1)
                             <p class="text-success">Active</p>
@@ -49,8 +50,8 @@
                         @endif
                     </td>
                     <td >
-                      <a href="{{ route('edit_category',$row->slug) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
-                      <a href="{{ route('Delete_Category',$row->slug) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
+                      <a href="#" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
+                      <a href="#" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
                   </td>
                   </tr>
                   @endforeach
@@ -80,23 +81,36 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Add New Category</h5>
+              <h5 class="modal-title">Add New Sub-Category</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('add_category') }}" method="post">
+                <form action="{{ route('create_sub.category') }}" method="post">
                     @csrf
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Category Name Bangla</label>
-                      <input type="text" class="form-control @error('category_bn') is-invalid @enderror" name="category_bn" placeholder="Category Name Bangla">
-                        @error('category_bn')
+                      <label for="exampleInputEmail1" class="form-label">Category</label>
+                      <select name="category_id" id="" class="form-control">
+                        <option disabled selected>==Choose One==</option>
+
+                        @foreach ($category as $row)
+                            <option value="{{ $row->id }}">{{ $row->category_bn }}</option>
+                        @endforeach
+                        
+                      </select>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Sub-Category Name Bangla</label>
+                      <input type="text" class="form-control @error('subcategory_bn') is-invalid @enderror" name="subcategory_bn" placeholder="Sub-Category Name Bangla">
+                        @error('subcategory_bn')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Category Name English</label>
-                      <input type="text" class="form-control @error('category_en') is-invalid @enderror" name="category_en" placeholder="Category Name English">
-                      @error('category_en')
+                      <input type="text" class="form-control @error('subcategory_en') is-invalid @enderror" name="subcategory_en" placeholder="Category Name English">
+                      @error('subcategory_en')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -104,9 +118,9 @@
                       <input type="checkbox" class="form-check-input" value="1" name="status">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
+                </form>
             
-          </div>
+            </div>
         </div>
       </div><!-- End Disabled Backdrop Modal-->
 
