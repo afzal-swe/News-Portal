@@ -76,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
             });
         });
 
-        // subcategory Route Section Start //
+        // District Route Section Start //
         Route::group(['prefix' => 'district'], function () {
             Route::controller(DistrictController::class)->group(function () {
                 Route::get('/view', 'District_View')->name('District_View');
@@ -84,6 +84,17 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{slug}', 'District_Edit')->name('district.edit');
                 Route::post('/update/{slug}', 'District_Update')->name('district.update');
                 Route::get('/delete/{slug}', 'District_Delete')->name('district.delete');
+            });
+        });
+
+        // Sub-District Route Section Start //
+        Route::group(['prefix' => 'sub-district'], function () {
+            Route::controller(SubDistrictController::class)->group(function () {
+                Route::get('/view', 'District_View')->name('Sub_district_View');
+                Route::post('/create', 'Add_Sub_District')->name('add_sub_district');
+                Route::get('/edit/{slug}', 'Sub_District_Edit')->name('sub_district.edit');
+                Route::post('/update/{slug}', 'Sub_District')->name('sub_district.update');
+                Route::get('/delete/{slug}', 'Sub_District_Delete')->name('sub_district.delete');
             });
         });
     });
