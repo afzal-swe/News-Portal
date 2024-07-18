@@ -40,6 +40,7 @@
                     {{-- @dd($category); --}}
                   <tr>
                     <th scope="row">{{ ++$key }}</th>
+                    <td>{{ $row->category_en ?? 'null' }}</td>
                     <td>{{ $row->subcategory_bn ?? 'null' }}</td>
                     <td>{{ $row->subcategory_en ?? 'null' }}</td>
                     <td>
@@ -50,8 +51,8 @@
                         @endif
                     </td>
                     <td >
-                      <a href="#" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
-                      <a href="#" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
+                      <a href="{{ route('subcategory.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
+                      <a href="{{ route('subcategory.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
                   </td>
                   </tr>
                   @endforeach
@@ -93,7 +94,7 @@
                         <option disabled selected>==Choose One==</option>
 
                         @foreach ($category as $row)
-                            <option value="{{ $row->id }}">{{ $row->category_bn }}</option>
+                            <option value="{{ $row->id }}">{{ $row->category_en }}| {{ $row->category_bn }}</option>
                         @endforeach
                         
                       </select>

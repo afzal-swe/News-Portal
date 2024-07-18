@@ -68,6 +68,9 @@ Route::middleware(['auth'])->group(function () {
             Route::controller(SubcategoryController::class)->group(function () {
                 Route::get('/view', 'Subategory_View')->name('Subategory_View');
                 Route::post('/create', 'Create_Subcategory')->name('create_sub.category');
+                Route::get('/edit/{id}', 'Subcategory_Edit')->name('subcategory.edit');
+                Route::post('/update/{id}', 'Update_Subcategory')->name('update_subcategory');
+                Route::get('/delete/{id}', 'Subcategory_Delete')->name('subcategory.delete');
             });
         });
     });
