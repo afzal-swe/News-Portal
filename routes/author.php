@@ -6,6 +6,8 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\RoleUserController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
+use App\Http\Controllers\Backend\DistrictController;
+use App\Http\Controllers\Backend\SubDistrictController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -71,6 +73,17 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{id}', 'Subcategory_Edit')->name('subcategory.edit');
                 Route::post('/update/{id}', 'Update_Subcategory')->name('update_subcategory');
                 Route::get('/delete/{id}', 'Subcategory_Delete')->name('subcategory.delete');
+            });
+        });
+
+        // subcategory Route Section Start //
+        Route::group(['prefix' => 'district'], function () {
+            Route::controller(DistrictController::class)->group(function () {
+                Route::get('/view', 'District_View')->name('District_View');
+                Route::post('/create', 'Add_District')->name('add_district');
+                Route::get('/edit/{slug}', 'District_Edit')->name('district.edit');
+                Route::post('/update/{slug}', 'District_Update')->name('district.update');
+                Route::get('/delete/{slug}', 'District_Delete')->name('district.delete');
             });
         });
     });
