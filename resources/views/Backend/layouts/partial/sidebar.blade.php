@@ -142,7 +142,7 @@
         </ul>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
+            <a href="{{ route('seo.create') }}">
               <i class="bi bi-circle"></i><span>Seo Section</span>
             </a>
           </li>
