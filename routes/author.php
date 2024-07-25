@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SocialController;
 use App\Http\Controllers\Backend\SeoController;
 use App\Http\Controllers\Backend\prayerController;
+use App\Http\Controllers\Backend\LivetvController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -134,12 +135,22 @@ Route::middleware(['auth'])->group(function () {
                     Route::post('/update/{id}', 'Seo_Update')->name('seo.update');
                 });
             });
-            // Seo Route Section Start //
+
+            // Prayer Route Section Start //
             Route::group(['prefix' => 'prayer'], function () {
                 Route::controller(prayerController::class)->group(function () {
                     Route::get('/', 'Prayer_Create')->name('prayer.create');
                     Route::post('/store', 'Prayer_Store')->name('prayer.store');
                     Route::post('/update/{id}', 'Prayer_Update')->name('prayer.update');
+                });
+            });
+
+            // Live TV Route Section Start //
+            Route::group(['prefix' => 'live-tv'], function () {
+                Route::controller(LivetvController::class)->group(function () {
+                    Route::get('/', 'Live_TV')->name('livetv.option');
+                    Route::post('/store', 'Livetv_Store')->name('livetv.store');
+                    Route::post('/update/{id}', 'Livetv_Update')->name('livetv.update');
                 });
             });
         });

@@ -150,7 +150,7 @@
         </ul>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
+            <a href="{{ route('livetv.option') }}">
               <i class="bi bi-circle"></i><span>Live TV</span>
             </a>
           </li>
