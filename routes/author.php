@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SocialController;
 use App\Http\Controllers\Backend\SeoController;
 use App\Http\Controllers\Backend\prayerController;
 use App\Http\Controllers\Backend\LivetvController;
+use App\Http\Controllers\Backend\NoticesController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -151,6 +152,15 @@ Route::middleware(['auth'])->group(function () {
                     Route::get('/', 'Live_TV')->name('livetv.option');
                     Route::post('/store', 'Livetv_Store')->name('livetv.store');
                     Route::post('/update/{id}', 'Livetv_Update')->name('livetv.update');
+                });
+            });
+
+            // Notice Route Section Start //
+            Route::group(['prefix' => 'notice'], function () {
+                Route::controller(NoticesController::class)->group(function () {
+                    Route::get('/', 'Notice')->name('notice');
+                    Route::post('/store', 'Notice_Store')->name('notice.store');
+                    Route::post('/update/{id}', 'Notice_Update')->name('notice.update');
                 });
             });
         });

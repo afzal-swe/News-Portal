@@ -126,7 +126,7 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
+            <a href="{{ route('notice') }}">
               <i class="bi bi-circle"></i><span>Notices</span>
             </a>
           </li>
