@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\SubDistrictController;
+use App\Http\Controllers\Backend\PostController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -95,6 +96,18 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{slug}', 'Sub_District_Edit')->name('sub_district.edit');
                 Route::post('/update/{slug}', 'Sub_District')->name('sub_district.update');
                 Route::get('/delete/{slug}', 'Sub_District_Delete')->name('sub_district.delete');
+            });
+        });
+
+        // Post Route Section Start //
+        Route::group(['prefix' => 'post'], function () {
+            Route::controller(PostController::class)->group(function () {
+                Route::get('/view', 'All_Post')->name('post.view');
+                Route::get('/create', 'Create_Post')->name('post.create');
+                Route::post('/store', 'Post_Create')->name('post.store');
+                Route::get('/edit/{id}', 'Post_Edit')->name('post.edit');
+                Route::post('/update/{id}', 'Post_Update')->name('post.update');
+                Route::get('/delete/{id}', 'Post_Delete')->name('post.delete');
             });
         });
     });

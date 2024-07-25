@@ -88,17 +88,17 @@
       {{-- Post Section --}}
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-navn" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>District</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Posts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="charts-navn" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>District</span>
+            <a href="{{ route('post.create') }}">
+              <i class="bi bi-circle"></i><span>Add New Post</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Sub-District</span>
+            <a href="{{ route('post.view') }}">
+              <i class="bi bi-circle"></i><span>Manage Post</span>
             </a>
           </li>
         </ul>
