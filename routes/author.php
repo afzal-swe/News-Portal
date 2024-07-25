@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SubDistrictController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SocialController;
 use App\Http\Controllers\Backend\SeoController;
+use App\Http\Controllers\Backend\prayerController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -119,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
             // Social Route Section Start //
             Route::group(['prefix' => 'social'], function () {
                 Route::controller(SocialController::class)->group(function () {
-                    Route::get('/create', 'Social_Create')->name('social.option');
+                    Route::get('/', 'Social_Create')->name('social.option');
                     Route::post('/store', 'Social_Store')->name('social.add');
                     Route::post('/update/{id}', 'Social_Update')->name('social.update');
                 });
@@ -128,9 +129,17 @@ Route::middleware(['auth'])->group(function () {
             // Seo Route Section Start //
             Route::group(['prefix' => 'seo'], function () {
                 Route::controller(SeoController::class)->group(function () {
-                    Route::get('/create', 'Seo_Create')->name('seo.create');
+                    Route::get('/', 'Seo_Create')->name('seo.create');
                     Route::post('/store', 'Seo_Store')->name('seo.store');
                     Route::post('/update/{id}', 'Seo_Update')->name('seo.update');
+                });
+            });
+            // Seo Route Section Start //
+            Route::group(['prefix' => 'prayer'], function () {
+                Route::controller(prayerController::class)->group(function () {
+                    Route::get('/', 'Prayer_Create')->name('prayer.create');
+                    Route::post('/store', 'Prayer_Store')->name('prayer.store');
+                    Route::post('/update/{id}', 'Prayer_Update')->name('prayer.update');
                 });
             });
         });

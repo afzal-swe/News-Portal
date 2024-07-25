@@ -166,8 +166,8 @@
         </ul>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Prayers Section</span>
+            <a href="{{ route('prayer.create') }}">
+              <i class="bi bi-circle"></i><span>Prayers Time</span>
             </a>
           </li>
           
