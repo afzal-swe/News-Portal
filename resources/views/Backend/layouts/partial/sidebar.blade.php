@@ -127,7 +127,47 @@
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Role Setting</span>
+              <i class="bi bi-circle"></i><span>Notices</span>
+            </a>
+          </li>
+          
+        </ul>
+        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('social.option') }}">
+              <i class="bi bi-circle"></i><span>Socials</span>
+            </a>
+          </li>
+          
+        </ul>
+        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="icons-bootstrap.html">
+              <i class="bi bi-circle"></i><span>Seo Section</span>
+            </a>
+          </li>
+          
+        </ul>
+        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="icons-bootstrap.html">
+              <i class="bi bi-circle"></i><span>Live TV</span>
+            </a>
+          </li>
+          
+        </ul>
+        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="icons-bootstrap.html">
+              <i class="bi bi-circle"></i><span>Website Settings</span>
+            </a>
+          </li>
+          
+        </ul>
+        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="icons-bootstrap.html">
+              <i class="bi bi-circle"></i><span>Prayers Section</span>
             </a>
           </li>
           

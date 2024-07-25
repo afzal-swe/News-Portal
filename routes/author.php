@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\SubDistrictController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\SocialController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -108,6 +109,15 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{id}', 'Post_Edit')->name('post.edit');
                 Route::post('/update/{id}', 'Post_Update')->name('post.update');
                 Route::get('/delete/{id}', 'Post_Delete')->name('post.delete');
+            });
+        });
+
+        // Post Route Section Start //
+        Route::group(['prefix' => 'social'], function () {
+            Route::controller(SocialController::class)->group(function () {
+                Route::get('/create', 'Social_Create')->name('social.option');
+                Route::post('/store', 'Social_Store')->name('social.add');
+                Route::post('/update/{id}', 'Social_Update')->name('social.update');
             });
         });
     });
