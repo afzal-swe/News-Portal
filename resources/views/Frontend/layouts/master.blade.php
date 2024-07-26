@@ -1,6 +1,45 @@
 @extends('Frontend.layouts.apps')
 @section('content')
 
+
+@php
+	$socials = DB::table('socials')->first();
+@endphp
+
+
+@php
+    function bn_date($str){
+        $en = array(1,2,3,4,5,6,7,8,9,0);
+        $bn = array('১','২','৩','৪','৫','৬','৭','৮','৯','০');
+        $str = str_replace($en,$bn,$str);
+
+        $en = array('January','February','March','April','May','June','July','August','September','Octobar','November','December');
+        $en_short = array('Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec');
+        $bn = array('জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর');
+        $str = str_replace($en,$bn,$str);
+        $str = str_replace($en_short,$bn,$str);
+
+        $en = array('Satuarday','Sunday','Monday','Tuesday','Wednesday','thursday','Friday');
+        $en_short = array('Sat','Sun','Mon','Tue','Wed','thu','Fri');
+        $bn_short = array('শনি','রবি','সোম','মঙ্গল','বুধ','বৃহ','শুক্র');
+        $bn = array('শনিবার','রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার');
+        $str = str_replace($en,$bn,$str);
+        $str = str_replace($en_short,$bn_short,$str);
+
+        $en = array('am','pm');
+        $bn = array('পূর্বাহন','অপরাহন');
+        $str = str_replace($en,$bn,$str);
+        $str = str_replace($en_short,$bn_short,$str);
+
+        $en = array('১২','২৪');
+        $en = array('৬','১২');
+        $str = str_replace($en,$bn,$str);
+        return $str;
+    }
+@endphp
+
+
+
     <!-- header-start -->
     <section class="hdr_section">
         <div class="container-fluid">			
@@ -23,42 +62,50 @@
                                         <span class="icon-bar"></span>
                                     </button>
                                 </div>
+
+
+								@php
+									$category= DB::table('categories')->orderBy('id', 'DESC')->get();
+								@endphp
+
                                 <!-- Collection of nav links and other content for toggling -->
                                 <div id="navbarCollapse" class="collapse navbar-collapse">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Home</a></li>
+                                        
+										@foreach ($category as $row)
+											
+										@php
+											$sub_cat = DB::table('subcategory')->where('category_id', $row->id)->get();
+										@endphp
+
                                             <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+													@if (session()->get('lang') == 'english')
+													{{ $row->category_en }} 
+													@else
+													{{ $row->category_bn }} 
+													@endif
+													
+												</a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">Home</a></li>
-                                                <li><a href="#">Home</a></li>
+												@foreach ($sub_cat as $row)
+												<li>
+													<a href="#">
+														@if (session()->get('lang') == 'english')
+														{{ $row->subcategory_en }}
+														@else
+														{{ $row->subcategory_bn }}
+														@endif
+														
+													</a>
+												</li>
+                                                
+												@endforeach
+                                                
                                             </ul>
                                             </li>
-                                        <li><a href="#">Home</a></li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Home</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Home</a></li>
-                                    
+											@endforeach
                                         
-                                        <li><a href="#" target="_blank">Home</a></li>
-                                        <li><a href="#" target="_blank">Home</a></li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Home</a></li>
-                                                <li><a href="#">Home</a></li>
-                                                
-                                                <li class="divider"></li>
-                                                <li><a href="#" rel="nofollow">Home</a></li>
-                                                <li><a href="#">Home</a></li>                           
-                                            </ul>
-                                        </li>
                                     </ul>
                                 </div>
                             </nav>											
@@ -68,10 +115,14 @@
                 <div class="col-xs-12 col-md-2 col-sm-12">
                     <div class="header-icon">
                         <ul>
-                            <!-- version-start -->
-                            <li class="version"><a href="#">English</a></li>
-                            <!-- login-start -->
-                        
+                           
+							@if (session()->get('lang')=="bangla")
+							<li class="version"><a href="{{ route('lang.english') }}">English</a></li>
+							@else
+							<li class="version"><a href="{{ route('lang.bangla') }}">Bangla</a></li>
+							@endif
+                            
+                            
                             <!-- search-start -->
                             <li><div class="search-large-divice">
                                 <div class="search-icon-holder"> <a href="#" class="search-icon" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-search" aria-hidden="true"></i></a>
@@ -107,10 +158,12 @@
                                 <div class="dropdown">
                                   <button class="dropbtn-02"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
                                   <div class="dropdown-content">
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
-                                    <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i> Youtube</a>
-                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a>
+                                    <a href="{{ $socials->facebook }}"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+                                    <a href="{{ $socials->twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
+                                    <a href="{{ $socials->youtube }}"><i class="fa fa-youtube-play" aria-hidden="true"></i> Youtube</a>
+                                    <a href="{{ $socials->instagram }}"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a>
+                                    <a href="{{ $socials->linkedin }}"><i class="fa fa-linkedin" aria-hidden="true"></i> linkedin</a>
+
                                   </div>
                                 </div>
                             </li>
@@ -141,9 +194,30 @@
     			<div class="col-md-12 col-sm-12">
 					<div class="date">
 						<ul>
-							<li><i class="fa fa-map-marker" aria-hidden="true"></i>  ঢাকা </li>
-							<li><i class="fa fa-calendar" aria-hidden="true"></i> ০৩:৩২ অপরাহ্ন, বৃহস্পতিবার, ০৭ মে ২০২০, ২৪ বৈশাখ ১৪২৭, ১৩ রমজান ১৪৪১ </li>
-							<li><i class="fa fa-clock-o" aria-hidden="true"></i> আপডেট ৫ মিনিট আগে</li>
+							<script type="text/javascript" src="http://bangladate.appspot.com/index2.php"></script>
+							<li><i class="fa fa-map-marker" aria-hidden="true"></i> 
+                                @if (session()->get('lang')=='bangla')
+                                ঢাকা
+                                @else
+                                Dhaka
+                                @endif
+                                </li>
+							<li><i class="fa fa-calendar" aria-hidden="true"></i> 
+
+                                @if (session()->get('lang')=='english')
+								{{ (date('d M Y, l, h:i:s a')) }}
+                                @else
+                                {{ bn_date(date('d M Y, l, h:i:s a')) }}
+                                @endif
+                            </li>
+
+							<li><i class="fa fa-clock-o" aria-hidden="true"></i>
+                                @if (session()->get('lang')=='bangla')
+                                আপডেট ৫ মিনিট আগে
+                                @else
+                                Updated 5 minutes ago
+                                @endif
+                            </li>
 						</ul>
 						
 					</div>
@@ -300,13 +374,20 @@
 						</div>
 					</div><!-- /.add-close -->	
 					
-					<!-- youtube-live-start -->	
-					<div class="cetagory-title-03">লাইভ টিভি </div>
-					<div class="photo">
-						<div class="embed-responsive embed-responsive-16by9 embed-responsive-item" style="margin-bottom:5px;">
-							<iframe width="729" height="410" src="https://www.youtube.com/embed/8HnnNf-3VuE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						</div>
-					</div><!-- /.youtube-live-close -->	
+
+					@php
+						$live_tv = DB::table('livetv')->first();
+					@endphp
+					@if ($live_tv->status == 1)
+						<!-- youtube-live-start -->	
+						<div class="cetagory-title-03">লাইভ টিভি </div>
+						<div class="photo">
+							<div class="embed-responsive embed-responsive-16by9 embed-responsive-item" style="margin-bottom:5px;">
+								{!! $live_tv->embed_code !!}
+							</div>
+						</div><!-- /.youtube-live-close -->	
+					@endif
+					
 					
 					<!-- facebook-page-start -->
 					<div class="cetagory-title-03">ফেসবুকে আমরা</div>
@@ -639,6 +720,88 @@
 					<div class="cetagory-title-03">নামাজের সময়সূচি </div>
 					Namaj Times count option here
 					<!-- Namaj Times -->
+					@php
+                            $prayers = DB::table('prayers')->first();
+                        @endphp
+                        @if (session()->get('lang')=='english')
+                            Prayer Times
+                        @else
+                        নামাজের সময়সূচি 
+                        @endif
+                        <!-- Namaj Times -->
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @if (session()->get('lang')=='english')
+                                    Fajr
+                                    <th>{{ $prayers->fajr_en }}</th>
+                                    @else
+                                    ফজর
+                                    <th>{{ $prayers->fajr_bn }}</th>
+                                    @endif
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @if (session()->get('lang')=='english')
+                                    Johuhr
+                                    <th>{{ $prayers->dhuhr_en }}</th>
+                                    @else
+                                    জোহুর
+                                    <th>{{ $prayers->dhuhr_bn }}</th>
+                                    @endif
+                                </th>
+                                
+                            </tr>
+                            <tr>
+                                <th>
+                                    @if (session()->get('lang')=='english')
+                                    asr
+                                    <th>{{ $prayers->asr_en }}</th>
+                                    @else
+                                    আসর
+                                    <th>{{ $prayers->asr_bn }}</th>
+                                    @endif
+                                </th>
+                                
+                            </tr>
+                            <tr>
+                                <th>
+                                    @if (session()->get('lang')=='english')
+                                    maghrib
+                                    <th>{{ $prayers->maghrib_en }}</th>
+                                    @else
+                                    মাগরিব
+                                    <th>{{ $prayers->maghrib_bn }}</th>
+                                    @endif
+                                </th>
+                                
+                            </tr>
+                            <tr>
+                                <th>
+                                    @if (session()->get('lang')=='english')
+                                    isha
+                                    <th>{{ $prayers->isha_en }}</th>
+                                    @else
+                                    ইশা
+                                    <th>{{ $prayers->isha_bn }}</th>
+                                    @endif
+                                </th>
+                                
+                            </tr>
+                            <tr>
+                                <th>
+                                    @if (session()->get('lang')=='english')
+                                    jummah
+                                    <th>{{ $prayers->jummah_en }}</th>
+                                    @else
+                                    জুম্মাহ
+                                    <th>{{ $prayers->jummah_bn }}</th>
+                                    @endif
+                                </th>
+                                
+                            </tr>
+                        </table>
 					<div class="cetagory-title-03">পুরানো সংবাদ  </div>
 					<form action="" method="post">
 						<div class="old-news-date">
@@ -875,6 +1038,7 @@
 		</div>
 	</section><!-- /.gallery-section-close -->
 
+
 	<!-- top-footer-start -->
 	<section>
 		<div class="container-fluid">
@@ -888,12 +1052,11 @@
 					<div class="col-md-6 col-sm-4">
 						 <div class="social">
                             <ul>
-                                <li><a href="" target="_blank" class="facebook"> <i class="fa fa-facebook"></i></a></li>
-                                <li><a href="" target="_blank" class="twitter"> <i class="fa fa-twitter"></i></a></li>
-                                <li><a href="" target="_blank" class="instagram"> <i class="fa fa-instagram"></i></a></li>
-                                <li><a href="" target="_blank" class="android"> <i class="fa fa-android"></i></a></li>
-                                <li><a href="" target="_blank" class="linkedin"> <i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="" target="_blank" class="youtube"> <i class="fa fa-youtube"></i></a></li>
+                                <li><a href="{{ $socials->facebook }}" target="_blank" class="facebook"> <i class="fa fa-facebook"></i></a></li>
+                                <li><a href="{{ $socials->twitter }}" target="_blank" class="twitter"> <i class="fa fa-twitter"></i></a></li>
+                                <li><a href="{{ $socials->instagram }}" target="_blank" class="instagram"> <i class="fa fa-instagram"></i></a></li>
+                                <li><a href="{{ $socials->linkedin }}" target="_blank" class="linkedin"> <i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="{{ $socials->youtube }}" target="_blank" class="youtube"> <i class="fa fa-youtube"></i></a></li>
                             </ul>
                         </div>
 					</div>
