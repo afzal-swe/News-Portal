@@ -104,6 +104,25 @@
         </ul>
       </li><!-- End Tables Nav -->
 
+      {{-- Post Section --}}
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-navnn" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Gallery</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-navnn" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('photos.gallery') }}">
+              <i class="bi bi-circle"></i><span>Photo Gallery</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Video Gallery</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
+
 
       <li class="nav-heading">Pages</li>
 

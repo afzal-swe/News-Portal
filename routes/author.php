@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\prayerController;
 use App\Http\Controllers\Backend\LivetvController;
 use App\Http\Controllers\Backend\NoticesController;
 use App\Http\Controllers\Backend\WebsiteController;
+use App\Http\Controllers\Backend\GalleryController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -117,9 +118,19 @@ Route::middleware(['auth'])->group(function () {
             });
         });
 
+        // Photos Route Section Start //
+        Route::group(['prefix' => 'photo'], function () {
+            Route::controller(GalleryController::class)->group(function () {
+                Route::get('/gallery', 'Photos_Gallery')->name('photos.gallery');
+                Route::post('/store', 'Store_Photos')->name('store.photos');
+                // Route::get('/edit/{id}', 'Post_Edit')->name('post.edit');
+                // Route::post('/update/{id}', 'Post_Update')->name('post.update');
+                Route::get('/delete/{id}', 'Gallery_Delete')->name('gallery.delete');
+            });
+        });
+
         // Setting Route Section Start
         Route::group(['prefix' => 'setting'], function () {
-
             // Social Route Section Start //
             Route::group(['prefix' => 'social'], function () {
                 Route::controller(SocialController::class)->group(function () {
