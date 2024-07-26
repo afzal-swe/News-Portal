@@ -22,7 +22,7 @@ class GalleryController extends Controller
     public function Photos_Gallery()
     {
         $photo = DB::table($this->db_gallery)->get();
-        return view('Backend.gallery.photos', compact('photo'));
+        return view('Backend.gallery.photo.photos', compact('photo'));
     }
 
     // Store Photos Gallery Function
@@ -51,6 +51,45 @@ class GalleryController extends Controller
         DB::table($this->db_gallery)->insert($data);
 
         $notification = array('messege' => 'Add New Photo Successfully!', 'alert-type' => 'success');
+        return redirect()->route('photos.gallery')->with($notification);
+    }
+
+    // Photo Gallery Edit Function 
+    public function Photo_Gallery_Edit($id)
+    {
+        $edit = DB::table($this->db_gallery)->where('id', $id)->first();
+
+        return view('Backend.gallery.photo.update', compact('edit'));
+    }
+
+    // Update Gallery Function
+    public function Photo_Update(Request $request, $id)
+    {
+
+        $data = array();
+        $data['title'] = $request->title;
+        $data['type'] = $request->type;
+        $data['updated_at'] = Carbon::now();
+
+        $image = $request->photo;
+        $oldimage = $request->oldimage;
+        if ($image) {
+
+            $image_one = uniqid() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(500, 310)->save('images/photo_gallery/' . $image_one);
+            $data['photo'] = 'images/photo_gallery/' . $image_one;   // public/files/product/plus-point.jpg
+
+            DB::table($this->db_gallery)->where('id', $id)->update($data);
+            unlink($oldimage);
+
+            $notification = array('messege' => 'Gallery Update Successfully!', 'alert-type' => 'success');
+            return redirect()->route('photos.gallery')->with($notification);
+        }
+        // jodi image na thake ta hole
+        $data['photo'] = $oldimage;
+        DB::table($this->db_gallery)->where('id', $id)->update($data);
+
+        $notification = array('messege' => 'Gallery Update Successfully!', 'alert-type' => 'success');
         return redirect()->route('photos.gallery')->with($notification);
     }
 

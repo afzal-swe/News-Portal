@@ -123,8 +123,8 @@ Route::middleware(['auth'])->group(function () {
             Route::controller(GalleryController::class)->group(function () {
                 Route::get('/gallery', 'Photos_Gallery')->name('photos.gallery');
                 Route::post('/store', 'Store_Photos')->name('store.photos');
-                // Route::get('/edit/{id}', 'Post_Edit')->name('post.edit');
-                // Route::post('/update/{id}', 'Post_Update')->name('post.update');
+                Route::get('/edit/{id}', 'Photo_Gallery_Edit')->name('photos.edit');
+                Route::post('/update/{id}', 'Photo_Update')->name('photo.update');
                 Route::get('/delete/{id}', 'Gallery_Delete')->name('gallery.delete');
             });
         });
