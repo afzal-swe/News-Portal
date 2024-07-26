@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\SeoController;
 use App\Http\Controllers\Backend\prayerController;
 use App\Http\Controllers\Backend\LivetvController;
 use App\Http\Controllers\Backend\NoticesController;
+use App\Http\Controllers\Backend\WebsiteController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -161,6 +162,18 @@ Route::middleware(['auth'])->group(function () {
                     Route::get('/', 'Notice')->name('notice');
                     Route::post('/store', 'Notice_Store')->name('notice.store');
                     Route::post('/update/{id}', 'Notice_Update')->name('notice.update');
+                });
+            });
+
+            // website Route Section Start //
+            Route::group(['prefix' => 'website'], function () {
+                Route::controller(WebsiteController::class)->group(function () {
+                    Route::get('/', 'Website')->name('website');
+                    Route::get('/create', 'Website_create')->name('website.create');
+                    Route::post('/store', 'Website_Store')->name('website.store');
+                    Route::get('/edit/{id}', 'Website_Edit')->name('website.edit');
+                    Route::post('/update/{id}', 'Website_Update')->name('website.update');
+                    Route::get('/delete/{id}', 'Website_Delete')->name('website.delete');
                 });
             });
         });
