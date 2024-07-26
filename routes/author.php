@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\LivetvController;
 use App\Http\Controllers\Backend\NoticesController;
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\GalleryController;
+use App\Http\Controllers\Backend\VideoController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -126,6 +127,17 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{id}', 'Photo_Gallery_Edit')->name('photos.edit');
                 Route::post('/update/{id}', 'Photo_Update')->name('photo.update');
                 Route::get('/delete/{id}', 'Gallery_Delete')->name('gallery.delete');
+            });
+        });
+
+        // Videos Route Section Start //
+        Route::group(['prefix' => 'video'], function () {
+            Route::controller(VideoController::class)->group(function () {
+                Route::get('/gallery', 'Video_Gallery')->name('video.gallery');
+                Route::post('/store', 'Store_Video')->name('video.store');
+                Route::get('/edit/{id}', 'Video_Edit')->name('video.edit');
+                Route::post('/update/{id}', 'Video_Update')->name('video.update');
+                Route::get('/delete/{id}', 'Video_Delete')->name('video.delete');
             });
         });
 

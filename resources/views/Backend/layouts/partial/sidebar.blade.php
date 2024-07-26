@@ -116,7 +116,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{ route('video.gallery') }}">
               <i class="bi bi-circle"></i><span>Video Gallery</span>
             </a>
           </li>
