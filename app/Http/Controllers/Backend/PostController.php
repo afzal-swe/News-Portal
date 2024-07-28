@@ -43,6 +43,7 @@ class PostController extends Controller
             ->join('categories', 'posts.cat_id', 'categories.id')
             ->join('subcategory', 'posts.subcat_id', 'subcategory.id')
             ->select('posts.*', 'categories.category_bn', 'subcategory.subcategory_bn')
+            ->orderBy('id', 'DESC')
             ->get();
 
         // dd($post);
@@ -69,7 +70,7 @@ class PostController extends Controller
             'title_bn' => 'required',
             'title_en' => 'required',
             'cat_id' => 'required',
-            'dist_id' => 'required',
+            // 'dist_id' => 'required',
             'details_en' => 'required',
             'details_bn' => 'required',
             'tags_en' => 'required',

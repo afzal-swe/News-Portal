@@ -18,7 +18,7 @@
               
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="text" class="form-control @error('title_bn') is-invalid @enderror" name="title_bn" id="floatingEmail" placeholder="Title Bangla">
+                  <input type="text" class="form-control @error('title_bn') is-invalid @enderror" name="title_bn" id="floatingEmail" placeholder="Title Bangla" value="{{ old('title_bn') }}">
                   <label for="floatingEmail">Title Bangla <samp class="text-danger">*</samp></label>
                 </div>
                 @error('title_bn')
@@ -28,7 +28,7 @@
 
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="text" class="form-control @error('title_en') is-invalid @enderror" name="title_en" id="floatingPassword" placeholder="Title English">
+                  <input type="text" class="form-control @error('title_en') is-invalid @enderror" name="title_en" id="floatingPassword" placeholder="Title English" value="{{ old('title_en') }}">
                   <label for="floatingPassword">Title English <samp class="text-danger">*</samp></label>
                 </div>
                 @error('title_en')
