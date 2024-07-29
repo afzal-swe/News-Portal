@@ -28,7 +28,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Title</th>
+                    <th scope="col">Title BN</th>
+                    <th scope="col">Title EN</th>
                     <th scope="col">Type</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -39,7 +40,8 @@
                   <tr>
                     <th scope="row">{{ ++$key }}</th>
                     <td> <img src="{{ asset($row->photo) }}" alt="" style="height: 70px; width:90px;"> </td>
-                    <td>{{ $row->title ?? 'null' }}</td>
+                    <td>{{ Str::of($row->title_bn ?? 'null')->limit(30); }}</td>
+                    <td>{{ Str::of($row->title_en ?? 'null')->limit(30); }}</td>
                     <td>
                         @if ($row->type == 1)
                             <span class="text-success">Big Photo</span>
@@ -86,9 +88,17 @@
                 <form action="{{ route('store.photos') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Title</label>
-                      <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" required>
-                        @error('title')
+                      <label for="exampleInputEmail1" class="form-label">Title BN</label>
+                      <input type="text" class="form-control @error('title_bn') is-invalid @enderror" name="title_bn" placeholder="Title BN" required>
+                        @error('title_bn')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Title EN</label>
+                      <input type="text" class="form-control @error('title_en') is-invalid @enderror" name="title_en" placeholder="Title EN" required>
+                        @error('title_en')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>

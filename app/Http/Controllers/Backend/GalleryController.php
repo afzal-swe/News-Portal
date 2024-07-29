@@ -21,7 +21,7 @@ class GalleryController extends Controller
     // Photo Gallery Function
     public function Photos_Gallery()
     {
-        $photo = DB::table($this->db_gallery)->get();
+        $photo = DB::table($this->db_gallery)->orderBy('id', 'DESC')->get();
         return view('Backend.gallery.photo.photos', compact('photo'));
     }
 
@@ -34,7 +34,8 @@ class GalleryController extends Controller
         ]);
 
         $data = array();
-        $data['title'] = $request->title;
+        $data['title_bn'] = $request->title_bn;
+        $data['title_en'] = $request->title_en;
         $data['type'] = $request->type;
         $data['created_at'] = Carbon::now();
 
@@ -67,7 +68,8 @@ class GalleryController extends Controller
     {
 
         $data = array();
-        $data['title'] = $request->title;
+        $data['title_bn'] = $request->title_bn;
+        $data['title_en'] = $request->title_en;
         $data['type'] = $request->type;
         $data['updated_at'] = Carbon::now();
 

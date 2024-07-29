@@ -17,9 +17,15 @@
               <form action="{{ route('photo.update',$edit->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Title</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Title BN</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" value="{{ $edit->title }}">
+                    <input type="text" class="form-control" name="title_bn" value="{{ $edit->title_bn }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Title EN</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title_en" value="{{ $edit->title_en }}">
                   </div>
                 </div>
 
