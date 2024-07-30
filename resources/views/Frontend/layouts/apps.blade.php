@@ -10,10 +10,17 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         
         @isset($seo)
             
         
+        <meta property="og:type" content="Website">
+        <meta property="og:title" content="{{ $seo->meta_title }}">
+        <meta property="og:description" content="{{ $seo->meta_description }}">
+
+
         <meta name="author" content="{{ $seo->meta_author }}">
         <meta name="keyword" content="{{ $seo->meta_keyword }}">
         <meta name="description" content="{{ $seo->meta_description }}">
@@ -33,8 +40,11 @@
 
     </head>
     <body>
+        @include('Frontend.partial.header');
  
         @yield('content');
+
+        @include('Frontend.partial.footer');
 	
 		<script src="{{ asset ('Frontend/assets/js/jquery.min.js')}}"></script>
 		<script src="{{ asset ('Frontend/assets/js/bootstrap.min.js')}}"></script>
