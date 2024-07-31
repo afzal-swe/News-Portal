@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\AdsController;
+use App\Http\Controllers\Backend\SettingsController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -150,6 +151,15 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{id}', 'Ads_Edit')->name('ads.edit');
                 Route::post('/update/{id}', 'Ads_Update')->name('ads.update');
                 Route::get('/delete/{id}', 'Ads_Delete')->name('ads.delete');
+            });
+        });
+
+        // Website Route Section Start //
+        Route::group(['prefix' => 'website-info'], function () {
+            Route::controller(SettingsController::class)->group(function () {
+                Route::get('/', 'Website_Info')->name('website.info');
+                Route::post('/store', 'Website_info_Store')->name('website_info.store');
+                Route::post('/update/{id}', 'Website_Info_Update')->name('website_info.update');
             });
         });
 

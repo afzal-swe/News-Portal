@@ -1,6 +1,7 @@
 
 @php
 $socials = DB::table('socials')->first();
+$setting = DB::table('settings')->first();
 @endphp
     <!-- top-footer-start -->
 	<section>
@@ -9,7 +10,7 @@ $socials = DB::table('socials')->first();
 				<div class="row">
 					<div class="col-md-3 col-sm-4">
 						<div class="foot-logo">
-							<img src="{{ asset ('Frontend/assets/img/demo_logo.png')}}" style="height: 50px;" />
+							<img src="{{ asset ($setting->logo)}}" style="height: 50px;" />
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-4">
@@ -42,17 +43,28 @@ $socials = DB::table('socials')->first();
 			<div class="row">
 				<div class="col-md-4 col-sm-4">
 					<div class="editor-one">
-						Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is 
+						@if (session()->get('lang')=='english')
+						Address : {{ $setting->address_en }}
+						@else
+						ঠিকানা : {{ $setting->address_bn }}
+						@endif
+						
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4">
 					<div class="editor-two">
-					Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is 
+					
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4">
 					<div class="editor-three">
-						Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is 
+						@if (session()->get('lang')=='english')
+							Phone : {{ $setting->phone_en }} <br>
+							E-mail: {{ $setting->email }}
+						@else
+							ফোন  : {{ $setting->phone_bn }} <br>
+							ইমেইল : {{ $setting->email }}
+						@endif
 					</div>
 				</div>
 			</div>
@@ -65,7 +77,7 @@ $socials = DB::table('socials')->first();
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
 					<div class="copyright">						
-						All rights reserved © 2020 LearnHunter
+						All rights reserved © 2020 CodeArtist.IT
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6">

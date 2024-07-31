@@ -2,6 +2,7 @@
     $socials = DB::table('socials')->first();
     $horizontal_ads = DB::table('ads')->where('type',2)->first();
     $vartical_ads = DB::table('ads')->where('type',1)->first();
+    $logo = DB::table('settings')->first();
  @endphp
 
  
@@ -11,7 +12,7 @@
         <div class="row">
             <div class="col-xs-6 col-md-2 col-sm-4">
                 <div class="header_logo">
-                    <a href=""><img src="{{ asset ('Frontend/assets/img/demo_logo.png')}}"></a> 
+                    <a href=""><img src="{{ asset ($logo->logo)}}"></a> 
                 </div>
             </div>              
             <div class="col-xs-6 col-md-8 col-sm-8">
