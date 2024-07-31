@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\NoticesController;
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\VideoController;
+use App\Http\Controllers\Backend\AdsController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -138,6 +139,17 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{id}', 'Video_Edit')->name('video.edit');
                 Route::post('/update/{id}', 'Video_Update')->name('video.update');
                 Route::get('/delete/{id}', 'Video_Delete')->name('video.delete');
+            });
+        });
+
+        // Videos Route Section Start //
+        Route::group(['prefix' => 'ads'], function () {
+            Route::controller(AdsController::class)->group(function () {
+                Route::get('/', 'Manage_Ads')->name('manage.ads');
+                Route::post('/store', 'Store_Ads')->name('store.ads');
+                Route::get('/edit/{id}', 'Ads_Edit')->name('ads.edit');
+                Route::post('/update/{id}', 'Ads_Update')->name('ads.update');
+                Route::get('/delete/{id}', 'Ads_Delete')->name('ads.delete');
             });
         });
 

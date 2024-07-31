@@ -104,6 +104,8 @@
         </ul>
       </li><!-- End Tables Nav -->
 
+      
+
       {{-- Post Section --}}
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-navnn" data-bs-toggle="collapse" href="#">
@@ -118,6 +120,20 @@
           <li>
             <a href="{{ route('video.gallery') }}">
               <i class="bi bi-circle"></i><span>Video Gallery</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
+
+      {{-- Advertisment Section --}}
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-navnnn" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Ads</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-navnnn" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('manage.ads') }}">
+              <i class="bi bi-circle"></i><span>Manage Ads</span>
             </a>
           </li>
         </ul>

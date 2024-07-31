@@ -44,7 +44,7 @@
                                     
 
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <a href="{{ route('subcategory_view',$row->id) }}" class="dropdown-toggle" data-toggle="dropdown">
                                                 @if (session()->get('lang') == 'english')
                                                 {{ $row->category_en }} 
                                                 @else

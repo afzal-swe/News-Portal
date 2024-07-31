@@ -8,19 +8,19 @@
 
 
 
-	@php
-		$firstsection_big = DB::table('posts')->where('first_section_thumbnail', 1)->orderBy('id', 'DESC')->first();
-		$firstsection_small = DB::table('posts')->where('first_section', 1)->orderBy('id', 'DESC')->limit(8)->get();
-	@endphp
-	{{-- @dd($firstsection_big); --}}
-
-
 
 	<!-- 1st-news-section-start -->	
 	<section class="news-section">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-9 col-sm-8">
+
+					{{-- First Section Big Imgae Sessction Start --}}
+					@php
+						$firstsection_big = DB::table('posts')->where('first_section_thumbnail', 1)->orderBy('id', 'DESC')->first();
+						$firstsection_small = DB::table('posts')->where('first_section', 1)->orderBy('id', 'DESC')->limit(8)->get();
+					@endphp
+					{{-- @dd($firstsection_big); --}}
 					<div class="row">
 						<div class="col-md-1 col-sm-1 col-lg-1"></div>
 						<div class="col-md-10 col-sm-10">
@@ -39,29 +39,28 @@
 								</div>
 							</div>
 						</div>
-						
 					</div>
+
+					{{-- First Section Small Post Section Start --}}
 						<div class="row">
 							@foreach ($firstsection_small as $row)
-								
-							
 							<div class="col-md-3 col-sm-3">
 								<div class="top-news">
 									<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
-										<h4 class="heading-02" style="height: 80px;">
-											<a href="{{ route('single.post',$row->slug) }}">
-											@if (session()->get('lang')=='english')
-												{{ $row->title_en }}
-											@else
-												{{ $row->title_bn }}
-											@endif
-											</a>
-										</h4>
+									<h4 class="heading-02" style="height: 80px;">
+										<a href="{{ route('single.post',$row->slug) }}">
+										@if (session()->get('lang')=='english')
+											{{ $row->title_en }}
+										@else
+											{{ $row->title_bn }}
+										@endif
+										</a>
+									</h4>
 								</div>
 							</div>
-							
 							@endforeach
 						</div>
+					{{-- First Section Small Post Section End --}}
 								
 					
 					<!-- add-start -->	
@@ -71,14 +70,17 @@
 						</div>
 					</div><!-- /.add-close -->	
 					
-					@php
-						$first_cate = DB::table('categories')->first();
-						$firstcatpostbig = DB::table('posts')->where('cat_id', $first_cate->id)->where('bigthumbnail',1)->orderBy('id', 'DESC')->first();
-						$firstcatpostsmall = DB::table('posts')->where('cat_id', $first_cate->id)->where('bigthumbnail',null)->limit(3)->orderBy('id', 'DESC')->get();
-						// @dd($first_cate)
-					@endphp
-					<!-- news-start -->
+					
+					
 					<div class="row">
+
+						{{-- Secound News Post Section Start --}}
+						@php
+							$first_cate = DB::table('categories')->first();
+							$firstcatpostbig = DB::table('posts')->where('cat_id', $first_cate->id)->where('bigthumbnail',1)->orderBy('id', 'DESC')->first();
+							$firstcatpostsmall = DB::table('posts')->where('cat_id', $first_cate->id)->where('bigthumbnail',null)->limit(3)->orderBy('id', 'DESC')->get();
+							// @dd($first_cate)
+						@endphp
 						<div class="col-md-6 col-sm-6">
 							<div class="bg-one">
 								<div class="cetagory-title">
@@ -88,7 +90,6 @@
 										{{ $first_cate->category_bn }}
 									@endif
 									<a href="{{ route('category_post',$first_cate->id) }}">
-										
 										<span>
 											@if (session()->get('lang')=='english')
 											More
@@ -102,9 +103,9 @@
 								<div class="row">
 									<div class="col-md-6 col-sm-6">
 										<div class="top-news">
-											<a href="#"><img src="{{ asset($firstcatpostbig->image) }}" alt="Notebook"></a>
+											<a href="{{ route('single.post',$firstcatpostbig->slug) }}"><img src="{{ asset($firstcatpostbig->image) }}" alt="Notebook"></a>
 											<h4 class="heading-02">
-												<a href="#">
+												<a href="{{ route('single.post',$firstcatpostbig->slug) }}">
 													@if (session()->get('lang')=='english')
 														{{ $firstcatpostbig->title_en }}
 													@else
@@ -117,33 +118,35 @@
 									<div class="col-md-6 col-sm-6">
 										@foreach ($firstcatpostsmall as $row)
 										<div class="image-title">
-											<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+											<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 											<h4 class="heading-03">
-												<a href="#">
+												<a href="{{ route('single.post',$row->slug) }}">
 													@if (session()->get('lang')=='english')
 														{{ $row->title_en }}
 													@else
 														{{ $row->title_bn }}
 													@endif
-												</a> </h4>
+												</a> 
+											</h4>
 										</div>
 										@endforeach
-										
 									</div>
 								</div>
 							</div>
 						</div>
 
+						{{-- Secound News Post Section End --}}
 
 
+						{{-- Thard News Post Section Start --}}
 						@php
-						$second_cate = DB::table('categories')->skip(1)->first();
-						$second_catpostbig = DB::table('posts')->where('cat_id', $second_cate->id)->where('bigthumbnail',1)->orderBy('id', 'DESC')->first();
-						$second_catpostsmall = DB::table('posts')->where('cat_id', $second_cate->id)->where('bigthumbnail',null)->limit(3)->orderBy('id', 'DESC')->get();
-					@endphp
+							$second_cate = DB::table('categories')->skip(1)->first();
+							$second_catpostbig = DB::table('posts')->where('cat_id', $second_cate->id)->where('bigthumbnail',1)->orderBy('id', 'DESC')->first();
+							$second_catpostsmall = DB::table('posts')->where('cat_id', $second_cate->id)->where('bigthumbnail',null)->limit(3)->orderBy('id', 'DESC')->get();
+						@endphp
 						<div class="col-md-6 col-sm-6">
 							<div class="bg-one">
-								<div class="cetagory-title"><a href="#">
+								<div class="cetagory-title">
 									@if (session()->get('lang')=='english')
 										{{ $second_cate->category_en }}
 									@else
@@ -160,13 +163,14 @@
 											<i class="fa fa-angle-double-right" aria-hidden="true"></i>
 											</span>
 										</a>
-									</span></a></div>
+									</span>
+								</div>
 								<div class="row">
 									<div class="col-md-6 col-sm-6">
 										<div class="top-news">
-											<a href="#"><img src="{{ asset($second_catpostbig->image) }}" alt="Notebook"></a>
+											<a href="{{ route('single.post',$second_catpostbig->slug) }}"><img src="{{ asset($second_catpostbig->image) }}" alt="Notebook"></a>
 											<h4 class="heading-02">
-												<a href="#">
+												<a href="{{ route('single.post',$second_catpostbig->slug) }}">
 													@if (session()->get('lang')=='english')
 														{{ $second_catpostbig->title_en }}
 													@else
@@ -179,26 +183,30 @@
 									<div class="col-md-6 col-sm-6">
 										<div class="image-title">
 											@foreach ($second_catpostsmall as $row)
-										<div class="image-title">
-											<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
-											<h4 class="heading-03">
-												<a href="#">
-													@if (session()->get('lang')=='english')
-														{{ $row->title_en }}
-													@else
-														{{ $row->title_bn }}
-													@endif
-												</a> </h4>
+											<div class="image-title">
+												<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+												<h4 class="heading-03">
+													<a href="{{ route('single.post',$row->slug) }}">
+														@if (session()->get('lang')=='english')
+															{{ $row->title_en }}
+														@else
+															{{ $row->title_bn }}
+														@endif
+													</a> 
+												</h4>
+											</div>
+											@endforeach
 										</div>
-										@endforeach
-										</div>
-										
 									</div>
 								</div>
 							</div>
 						</div>
+						{{-- Thard News Post Section End --}}
 					</div>					
 				</div>
+
+				
+
 				<div class="col-md-3 col-sm-3">
 					<!-- add-start -->	
 					<div class="row">
@@ -207,7 +215,7 @@
 						</div>
 					</div><!-- /.add-close -->	
 					
-
+					{{-- Live Tv Section Start --}}
 					@php
 						$live_tv = DB::table('livetv')->first();
 					@endphp
@@ -225,6 +233,8 @@
 							</div>
 						</div><!-- /.youtube-live-close -->	
 					@endif
+
+					{{-- Live Tv Section End --}}
 					
 					
 					<!-- facebook-page-start -->
@@ -265,6 +275,7 @@
 									{{ $thard__cate->category_bn }}
 								@endif
 								<i class="fa fa-angle-right" aria-hidden="true"></i>
+								<a href="{{ route('category_post',$thard__cate->id) }}">
 								<span>
 									<i class="fa fa-plus" aria-hidden="true"></i> 
 									@if (session()->get('lang')=='english')
@@ -273,6 +284,7 @@
 									সব খবর
 									@endif
 								</span>
+							</a>
 							</a>
 						</div>
 						<div class="row">
@@ -328,6 +340,7 @@
 									{{ $forth_catpostbig_cat->category_bn }}
 								@endif
 								<i class="fa fa-angle-right" aria-hidden="true"></i>
+								<a href="{{ route('category_post',$forth_catpostbig_cat->id) }}">
 								<span>
 									<i class="fa fa-plus" aria-hidden="true"></i> 
 									@if (session()->get('lang')=='english')
@@ -336,6 +349,7 @@
 									সব খবর
 									@endif
 								</span>
+							</a>
 							</a>
 						</div>
 						<div class="row">
@@ -394,6 +408,7 @@
 									{{ $five_catpostbig_cat->category_bn }}
 								@endif
 								<i class="fa fa-angle-right" aria-hidden="true"></i>
+								<a href="{{ route('category_post',$five_catpostbig_cat->id) }}">
 								<span>
 									<i class="fa fa-plus" aria-hidden="true"></i> 
 									@if (session()->get('lang')=='english')
@@ -402,6 +417,7 @@
 									সব খবর
 									@endif
 								</span>
+							</a>
 							</a>
 						</div>
 						<div class="row">
@@ -459,6 +475,7 @@
 									{{ $six_catpostbig_cat->category_bn }}
 								@endif
 								<i class="fa fa-angle-right" aria-hidden="true"></i>
+								<a href="{{ route('category_post',$six_catpostbig_cat->id) }}">
 								<span>
 									<i class="fa fa-plus" aria-hidden="true"></i> 
 									@if (session()->get('lang')=='english')
@@ -467,6 +484,7 @@
 									সব খবর
 									@endif
 								</span>
+							</a>
 							</a>
 						</div>
 						<div class="row">
@@ -540,8 +558,10 @@
 							সারাদেশে  
 							@endif
 						
-						<i class="fa fa-angle-right" aria-hidden="true"></i> 
-						<span>
+						{{-- <i class="fa fa-angle-right" aria-hidden="true"></i> 
+						<a href="#"> --}}
+						{{-- <a href="{{ route('subcategory_view',$country_big_post->id) }}"> --}}
+						{{-- <span>
 							<i class="fa fa-plus" aria-hidden="true"></i>
 							@if (session()->get('lang')=='english')
 							All News
@@ -549,7 +569,8 @@
 							সব খবর
 							@endif 
 						</span>
-						</a>
+					</a>
+						</a> --}}
 					</div>
 					
 					<div class="row">
@@ -620,7 +641,7 @@
 									@else
 										{{ $seven_cate->category_bn }}
 									@endif
-									<a href="#">
+									<a href="{{ route('category_post',$seven_cate->id) }}">
 										<span>
 											@if (session()->get('lang')=='english')
 											More
@@ -682,7 +703,7 @@
 										{{ $eight_cate->category_bn }}
 									@endif
 									 <span>
-										<a href="#">
+										<a href="{{ route('category_post',$eight_cate->id) }}">
 											<span>
 												@if (session()->get('lang')=='english')
 												More
