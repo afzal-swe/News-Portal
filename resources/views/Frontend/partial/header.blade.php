@@ -1,6 +1,9 @@
  @php
-     $socials = DB::table('socials')->first();
+    $socials = DB::table('socials')->first();
+    $horizontal_ads = DB::table('ads')->where('type',2)->first();
+    $vartical_ads = DB::table('ads')->where('type',1)->first();
  @endphp
+
  
  <!-- header-start -->
  <section class="hdr_section">
@@ -180,8 +183,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <div class="top-add"><img src="{{ asset ('Frontend/assets/img/top_ad.jpg')}}" alt="" /></div>
-					{{-- <img src="{{ asset ('Frontend/assets/img/add_01.jpg')}}" alt="" /> --}}
+                    @if ($horizontal_ads==Null)
+                        
+                    @else
+                    <a href="{{ $horizontal_ads->link }}">
+                        <div class="top-add"><img src="{{ asset ($horizontal_ads->image)}}" alt="" /></div>
+                    </a>
+                    
+                    @endif
+                    
+					
                 </div>
             </div>
         </div>

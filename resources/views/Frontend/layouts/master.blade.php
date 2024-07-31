@@ -4,6 +4,8 @@
 
 @php
 	$website = DB::table('websites')->get();
+	$horizontal_ads = DB::table('ads')->where('type',2)->first();
+	$vartical_ads = DB::table('ads')->where('type',1)->first();
 @endphp
 
 
@@ -66,7 +68,14 @@
 					<!-- add-start -->	
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
-							<div class="add"><img src="{{ asset ('Frontend/assets/img/top-ad.jpg')}}" alt="" /></div>
+							@if ($horizontal_ads==Null)
+                        
+							@else
+							<a href="{{ $horizontal_ads->link }}">
+								<div class="top-add"><img src="{{ asset ($horizontal_ads->image)}}" alt="" /></div>
+							</a>
+							
+							@endif
 						</div>
 					</div><!-- /.add-close -->	
 					
@@ -211,7 +220,14 @@
 					<!-- add-start -->	
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
-							<div class="sidebar-add"><img src="{{ asset ('Frontend/assets/img/add_01.jpg')}}" alt="" /></div>
+							<a href="{{ $vartical_ads->link }}">
+								@if ($vartical_ads==Null)
+								
+							@else
+								
+							<div class="sidebar-add"><img src="{{ asset ($vartical_ads->image)}}" alt="" /></div>
+							@endif
+							</a>
 						</div>
 					</div><!-- /.add-close -->	
 					
@@ -238,16 +254,32 @@
 					
 					
 					<!-- facebook-page-start -->
-					<div class="cetagory-title-03">ফেসবুকে আমরা</div>
-					<div class="fb-root">
-						facebook page here
-					</div><!-- /.facebook-page-close -->	
+					<div class="cetagory-title-03">
+						@if (session()->get('lang')=='english')
+						We are on Facebook
+						@else
+						ফেসবুকে আমরা
+						@endif
+						</div>
+						<div id="fb-root"></div>
+	
+						<div class="fb-page" data-href="https://www.facebook.com/codeartist.IT" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/codeartist.IT" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/codeartist.IT">Code Artist.IT</a></blockquote></div>
+						<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v17.0" nonce="99aqICqK"></script>
+						<!-- /.facebook-page-close--------------------------------------------------------------------------------------------------------->	
 					
 					<!-- add-start -->	
+					<br>
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
 							<div class="sidebar-add">
-								<img src="{{ asset ('Frontend/assets/img/add_01.jpg')}}" alt="" />
+								<a href="{{ $vartical_ads->link }}">
+								@if ($vartical_ads==Null)
+									
+								@else
+									
+								<img src="{{ asset ($vartical_ads->image)}}" alt="" />
+								@endif
+							</a>
 							</div>
 						</div>
 					</div><!-- /.add-close -->	
@@ -290,9 +322,9 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="top-news">
-									<a href="#"><img src="{{ asset ($thard_catpostbig->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$thard_catpostbig->slug) }}"><img src="{{ asset ($thard_catpostbig->image)}}" alt="Notebook"></a>
 									<h4 class="heading-02">
-										<a href="#">
+										<a href="{{ route('single.post',$thard_catpostbig->slug) }}">
 											@if (session()->get('lang')=='english')
 												{{ $thard_catpostbig->title_en }}
 											@else
@@ -307,9 +339,9 @@
 									
 								
 								<div class="image-title">
-									<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 									<h4 class="heading-03">
-										<a href="#">
+										<a href="{{ route('single.post',$row->slug) }}">
 											@if (session()->get('lang')=='english')
 												{{ $row->title_en }}
 											@else
@@ -355,9 +387,9 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="top-news">
-									<a href="#"><img src="{{ asset ($forth_catpostbig->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$forth_catpostbig->slug) }}"><img src="{{ asset ($forth_catpostbig->image)}}" alt="Notebook"></a>
 										<h4 class="heading-02">
-											<a href="#">
+											<a href="{{ route('single.post',$forth_catpostbig->slug) }}">
 												@if (session()->get('lang')=='english')
 													{{ $forth_catpostbig->title_en }}
 												@else
@@ -372,9 +404,9 @@
 									
 								
 								<div class="image-title">
-									<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 									<h4 class="heading-03">
-										<a href="#">
+										<a href="{{ route('single.post',$row->slug) }}">
 											@if (session()->get('lang')=='english')
 												{{ $row->title_en }}
 											@else
@@ -423,9 +455,9 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="top-news">
-									<a href="#"><img src="{{ asset ($five_catpostbig->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$five_catpostbig->slug) }}"><img src="{{ asset ($five_catpostbig->image)}}" alt="Notebook"></a>
 									<h4 class="heading-02">
-										<a href="#">
+										<a href="{{ route('single.post',$five_catpostbig->slug) }}">
 											@if (session()->get('lang')=='english')
 												{{ $five_catpostbig->title_en }}
 											@else
@@ -440,9 +472,9 @@
 									
 								
 								<div class="image-title">
-									<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 									<h4 class="heading-03">
-										<a href="#">
+										<a href="{{ route('single.post',$row->slug) }}">
 											@if (session()->get('lang')=='english')
 												{{ $row->title_en }}
 											@else
@@ -490,9 +522,9 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="top-news">
-									<a href="#"><img src="{{ asset ($six_catpostbig->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$six_catpostbig->slug) }}"><img src="{{ asset ($six_catpostbig->image)}}" alt="Notebook"></a>
 									<h4 class="heading-02">
-										<a href="#">
+										<a href="{{ route('single.post',$six_catpostbig->slug) }}">
 											@if (session()->get('lang')=='english')
 												{{ $six_catpostbig->title_en }}
 											@else
@@ -507,9 +539,9 @@
 									
 								
 								<div class="image-title">
-									<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+									<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 									<h4 class="heading-03">
-										<a href="#">
+										<a href="{{ route('single.post',$row->slug) }}">
 											@if (session()->get('lang')=='english')
 												{{ $row->title_en }}
 											@else
@@ -528,10 +560,24 @@
 			<!-- add-start -->	
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
-					<div class="add"><img src="{{ asset ('Frontend/assets/img/top-ad.jpg')}}" alt="" /></div>
+					@if ($horizontal_ads==Null)
+                        
+                    @else
+                    <a href="{{ $horizontal_ads->link }}">
+                        <div class="top-add"><img src="{{ asset ($horizontal_ads->image)}}" alt="" /></div>
+                    </a>
+                    
+                    @endif
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<div class="add"><img src="{{ asset ('Frontend/assets/img/top-ad.jpg')}}" alt="" /></div>
+					@if ($horizontal_ads==Null)
+                        
+                    @else
+                    <a href="{{ $horizontal_ads->link }}">
+                        <div class="top-add"><img src="{{ asset ($horizontal_ads->image)}}" alt="" /></div>
+                    </a>
+                    
+                    @endif
 				</div>
 			</div><!-- /.add-close -->	
 			
@@ -576,9 +622,9 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-4">
 							<div class="top-news">
-								<a href="#"><img src="{{ asset ($country_big_post->image)}}" alt="Notebook"></a>
+								<a href="{{ route('single.post',$country_big_post->slug) }}"><img src="{{ asset ($country_big_post->image)}}" alt="Notebook"></a>
 								<h4 class="heading-02">
-									<a href="#">
+									<a href="{{ route('single.post',$country_big_post->slug) }}">
 										@if (session()->get('lang')=='english')
 											{{ $country_big_post->title_en }}
 										@else
@@ -591,9 +637,9 @@
 						<div class="col-md-4 col-sm-4">
 							@foreach ($countryFirst as $row)
 							<div class="image-title">
-								<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+								<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 								<h4 class="heading-03">
-									<a href="#">
+									<a href="{{ route('single.post',$row->slug) }}">
 										@if (session()->get('lang')=='english')
 											{{ $row->title_en }}
 										@else
@@ -608,9 +654,9 @@
 						<div class="col-md-4 col-sm-4">
 							@foreach ($countrySecound as $row)
 							<div class="image-title">
-								<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+								<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 								<h4 class="heading-03">
-									<a href="#">
+									<a href="{{ route('single.post',$row->slug) }}">
 										@if (session()->get('lang')=='english')
 											{{ $row->title_en }}
 										@else
@@ -655,9 +701,9 @@
 								<div class="row">
 									<div class="col-md-6 col-sm-6">
 										<div class="top-news">
-											<a href="#"><img src="{{ asset($seven_catpostbig->image) }}" alt="Notebook"></a>
+											<a href="{{ route('single.post',$seven_catpostbig->slug) }}"><img src="{{ asset($seven_catpostbig->image) }}" alt="Notebook"></a>
 											<h4 class="heading-02">
-												<a href="#">
+												<a href="{{ route('single.post',$seven_catpostbig->slug) }}">
 													@if (session()->get('lang')=='english')
 														{{ $seven_catpostbig->title_en }}
 													@else
@@ -670,9 +716,9 @@
 									<div class="col-md-6 col-sm-6">
 										@foreach ($seven_catpostsmall as $row)
 										<div class="image-title">
-											<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+											<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 											<h4 class="heading-03">
-												<a href="#">
+												<a href="{{ route('single.post',$row->slug) }}">
 													@if (session()->get('lang')=='english')
 														{{ $row->title_en }}
 													@else
@@ -717,9 +763,9 @@
 								<div class="row">
 									<div class="col-md-6 col-sm-6">
 										<div class="top-news">
-											<a href="#"><img src="{{ asset($eight_catpostbig->image) }}" alt="Notebook"></a>
+											<a href="{{ route('single.post',$eight_catpostbig->slug) }}"><img src="{{ asset($eight_catpostbig->image) }}" alt="Notebook"></a>
 											<h4 class="heading-02">
-												<a href="#">
+												<a href="{{ route('single.post',$eight_catpostbig->slug) }}">
 													@if (session()->get('lang')=='english')
 														{{ $eight_catpostbig->title_en }}
 													@else
@@ -733,9 +779,9 @@
 										<div class="image-title">
 											@foreach ($eight_catpostsmall as $row)
 										<div class="image-title">
-											<a href="#"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
+											<a href="{{ route('single.post',$row->slug) }}"><img src="{{ asset ($row->image)}}" alt="Notebook"></a>
 											<h4 class="heading-03">
-												<a href="#">
+												<a href="{{ route('single.post',$row->slug) }}">
 													@if (session()->get('lang')=='english')
 														{{ $row->title_en }}
 													@else
@@ -756,7 +802,14 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12">
 							<div class="sidebar-add">
-								<img src="{{ asset ('Frontend/assets/img/top-ad.jpg')}}" alt="" />
+								@if ($horizontal_ads==Null)
+                        
+								@else
+								<a href="{{ $horizontal_ads->link }}">
+									<div class="top-add"><img src="{{ asset ($horizontal_ads->image)}}" alt="" /></div>
+								</a>
+								
+								@endif
 							</div>
 						</div>
 					</div><!-- /.add-close -->	
@@ -814,7 +867,7 @@
 									@foreach ($latest as $row)
 									<div class="news-title-02">
 										<h4 class="heading-03">
-											<a href="#">
+											<a href="{{ route('single.post',$row->slug) }}">
 												@if (session()->get('lang')=='english')
 													{{ Str::of($row->title_en)->limit(30) }}
 												@else
@@ -833,7 +886,7 @@
 									@foreach ($Favourite as $row)
 									<div class="news-title-02">
 										<h4 class="heading-03">
-											<a href="#">
+											<a href="{{ route('single.post',$row->slug) }}">
 												@if (session()->get('lang')=='english')
 													{{ Str::of($row->title_en)->limit(30) }}
 												@else
@@ -852,7 +905,7 @@
 									@foreach ($Highest as $row)
 									<div class="news-title-02">
 										<h4 class="heading-03">
-											<a href="#">
+											<a href="{{ route('single.post',$row->slug) }}">
 												@if (session()->get('lang')=='english')
 													{{ Str::of($row->title_en)->limit(30) }}
 												@else
@@ -1011,7 +1064,9 @@
 	                    <div class="col-md-8 col-sm-8">
 	                        <div class="photo_screen">
 	                            <div class="myPhotos" style="width:100%">
+									<a href="#">
                                       <img src="{{ asset ($photo_big->photo)}}"  alt="Avatar">
+									</a>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -1021,13 +1076,17 @@
 									
 								
 	                            <div class="photo_img photo_border active">
-	                                <img src="{{ asset ($row->photo)}}" alt="image" onclick="currentDiv(1)">
+									<a href="#">
+										<img src="{{ asset ($row->photo)}}" alt="image" onclick="currentDiv(1)">
+									</a>
 	                                <div class="heading-03">
-	                                    @if (session()->get('lang')=='english')
-											{{ $row->title_en }}
-										@else
-											{{ $row->title_bn }}
-										@endif
+										<a href="#">
+											@if (session()->get('lang')=='english')
+												{{ $row->title_en }}
+											@else
+												{{ $row->title_bn }}
+											@endif
+										</a>
 	                                </div>
 	                            </div>
 								@endforeach
