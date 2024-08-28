@@ -12,12 +12,28 @@ class SeoController extends Controller
     //
     private $db_seo;
 
+
+    /**
+     * Create a new instance of the class.
+     *
+     * This constructor initializes the `$db_seo` property with the name of the database table used for storing SEO entries.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->db_seo = "seos";
     }
 
-    // Seo Create or Update From Section 
+
+
+    /**
+     * Display the SEO create or update form.
+     *
+     * This method checks if an SEO entry exists in the database. If no SEO entry is found, it returns a view for creating a new SEO entry. If an SEO entry is found, it returns a view for updating the existing SEO entry, passing the SEO data to the view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Seo_Create()
     {
 
@@ -32,7 +48,18 @@ class SeoController extends Controller
         }
     }
 
-    // Seo Store Function
+
+
+
+
+    /**
+     * Store a new SEO entry in the database.
+     *
+     * This method retrieves SEO-related data from the request, constructs an array of this data, and inserts it into the database. It then redirects the user to the SEO creation page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Seo_Store(Request $request)
     {
 
@@ -52,7 +79,20 @@ class SeoController extends Controller
         return redirect()->route('seo.create')->with($notification);
     }
 
-    // Update Seo Section
+
+
+
+
+
+    /**
+     * Update an existing SEO entry in the database.
+     *
+     * This method retrieves updated SEO-related data from the request, constructs an array of this data, and updates the corresponding SEO entry in the database based on the provided ID. It then redirects the user to the SEO creation page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Seo_Update(Request $request, $id)
     {
 

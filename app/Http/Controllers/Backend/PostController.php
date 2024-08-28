@@ -19,6 +19,12 @@ class PostController extends Controller
     private $db_district;
     private $db_sub_district;
 
+
+    /**
+     * Initialize the controller with database table names.
+     *
+     * This constructor sets up the database table names for posts, categories, subcategories, districts, and sub-districts, which are used throughout the controller's methods.
+     */
     public function __construct()
     {
         $this->db_post = "posts";
@@ -28,7 +34,15 @@ class PostController extends Controller
         $this->db_sub_district = "sub_districts";
     }
 
-    // View All Post Function
+
+
+    /**
+     * Retrieve and display all posts with their associated category and subcategory.
+     *
+     * This method fetches posts from the `posts` table and joins the `categories` and `subcategory` tables to include additional details. It orders the posts by ID in descending order and passes the data to the `view_post` view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function All_Post()
     {
 
@@ -51,7 +65,16 @@ class PostController extends Controller
         return view('Backend.post.view_post', compact('post'));
     }
 
-    // Create Post Function
+
+
+
+    /**
+     * Display the form to create a new post with dropdowns for categories, subcategories, districts, and sub-districts.
+     *
+     * This method retrieves data from the `categories`, `subcategory`, `districts`, and `sub_districts` tables and passes it to the `create_post` view. The view will use this data to populate dropdowns for creating a new post.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Create_Post()
     {
 

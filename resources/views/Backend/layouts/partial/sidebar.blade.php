@@ -159,17 +159,6 @@
       
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      
-
-      
-
-      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="ri-settings-5-line"></i><span>Setting</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>

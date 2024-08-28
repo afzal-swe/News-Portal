@@ -33,6 +33,11 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset ('Backend/assets/css/style.css')}}" rel="stylesheet">
 
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('Backend/assets/vendor/toastr/toastr.css')}}">
+
+ 
+
 
 
 
@@ -74,7 +79,30 @@
   <!-- Template Main JS File -->
   <script src="{{ asset ('Backend/assets/js/main.js')}}"></script>
 
+   {{-- Sweet Alert --}}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="{{ asset('backend/assets/js/code.js') }}"></script>
 
+  <script src="{{ asset('Backend/assets/vendor/toastr/toastr.min.js') }}"></script>
+<script>
+	@if (Session::has('messege'))
+	var type="{{Session::get('alert-type','info')}}"
+	switch(type){
+		case 'info':
+			toastr.info("{{ Session::get('messege') }}");
+			break;
+		case 'success':
+			toastr.success("{{ Session::get('messege') }}");
+			break;
+		case 'warning':
+			toastr.warning("{{ Session::get('messege') }}");
+			break;
+		case 'error':
+			toastr.error("{{ Session::get('messege') }}");
+			break;
+	}   
+	@endif
+  </script>
 </body>
 
 </html>

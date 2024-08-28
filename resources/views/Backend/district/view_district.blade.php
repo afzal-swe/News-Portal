@@ -49,8 +49,8 @@
                         @endif
                     </td>
                     <td >
-                      <a href="{{ route('district.edit',$row->slug) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
-                      <a href="{{ route('district.delete',$row->slug) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
+                      <a href="{{ route('district.edit',$row->slug) }}" class="btn btn-info sm" title="Edit Data"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ route('district.delete',$row->slug) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="bi bi-archive"></i></a>
                   </td>
                   </tr>
                   @endforeach
@@ -88,16 +88,16 @@
                     @csrf
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">District Name Bangla</label>
-                      <input type="text" class="form-control @error('district_bn')District is-invalid @enderror" name="district_bn" placeholder="District Name Bangla">
+                      <input type="text" class="form-control" name="district_bn" placeholder="District Name Bangla">
                         @error('district_bn')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">District Name English</label>
-                      <input type="text" class="form-control @error('district_en') is-invalid @enderror" name="district_en" placeholder="District Name English">
+                      <input type="text" class="form-control" name="district_en" placeholder="District Name English">
                       @error('district_en')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3 form-check">

@@ -53,8 +53,6 @@
                         @else
                             <img src="{{ asset($edit_ads->image) }}" alt="" style="height: 110px; width:20;">
                         @endif
-                        
-                        <input type="hidden" name="oldimage" value="{{ $edit_ads->image }}">
                     </div>
                   </div>
                   

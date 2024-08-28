@@ -14,12 +14,29 @@ class SettingsController extends Controller
 
     private $db_website_info;
 
+
+
+    /**
+     * Create a new instance of the class.
+     *
+     * This constructor initializes the `$db_website_info` property with the name of the database table used for storing website settings.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->db_website_info = "settings";
     }
 
 
+
+    /**
+     * Display the form to create or update website information.
+     *
+     * This method retrieves the first record from the `settings` table. If no record is found, it returns a view for creating new website information. If a record is found, it returns a view for updating the existing website information, passing the retrieved data to the view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Website_Info()
     {
         $website_update = DB::table($this->db_website_info)->first();
@@ -31,7 +48,17 @@ class SettingsController extends Controller
         }
     }
 
-    // Web site Store
+
+
+
+    /**
+     * Store new website information in the database.
+     *
+     * This method validates the incoming request data, prepares an array with the website information, and inserts it into the `settings` table. It handles image uploads by resizing and saving the logo image, then redirects the user to the website information page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Website_info_Store(Request $request)
     {
 
@@ -68,7 +95,19 @@ class SettingsController extends Controller
         return redirect()->route('website.info')->with($notification);
     }
 
-    // Web Site Info Update
+
+
+
+
+    /**
+     * Update existing website information in the database.
+     *
+     * This method validates the incoming request data, prepares an array with the updated website information, and updates the record in the `settings` table. If a new logo image is provided, it handles image uploads by resizing and saving the new logo, while deleting the old image. Redirects the user to the website information page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Website_Info_Update(Request $request, $id)
     {
         // dd($request->all());
@@ -84,22 +123,20 @@ class SettingsController extends Controller
         $data['created_at'] = Carbon::now();
 
         $image = $request->logo;
-        $oldimage = $request->oldimage;
+
         //single thumbnail
         if ($image) {
+
+            $info_data = DB::table($this->db_website_info)->where('id', $id)->first();
+            $old_image = $info_data->logo;
+            unlink($old_image);
+
 
             $image_one = uniqid() . '.' . $image->getClientOriginalExtension();
             Image::make($image)->resize(320, 130)->save('images/setting/' . $image_one);
             $data['logo'] = 'images/setting/' . $image_one;   // public/files/product/plus-point.jpg
-
-            DB::table($this->db_website_info)->where('id', $id)->update($data);
-            unlink($oldimage);
-
-            $notification = array('messege' => 'Update Successfully!', 'alert-type' => 'success');
-            return redirect()->route('website.info')->with($notification);
         }
-        // jodi image na thake ta hole
-        $data['logo'] = $oldimage;
+
         DB::table($this->db_website_info)->where('id', $id)->update($data);
 
         $notification = array('messege' => 'Update Successfully!', 'alert-type' => 'success');

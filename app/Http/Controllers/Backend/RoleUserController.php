@@ -14,6 +14,14 @@ class RoleUserController extends Controller
 
     private $User_Role;
 
+
+    /**
+     * Create a new instance of the class.
+     *
+     * This constructor initializes the `$User_Role` property with the name of the database table used for storing user roles.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->User_Role = "role";

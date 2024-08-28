@@ -85,6 +85,8 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('view_user');
+        // $notification = array('message' => 'User Added Successfully', 'alert-type' => 'success');
+        $notification = array('messege' => 'Services Create Successfully!', 'alert-type' => 'success');
+        return redirect()->route('view_user')->with($notification);
     }
 }

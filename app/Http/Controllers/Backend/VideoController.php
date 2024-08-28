@@ -12,12 +12,29 @@ class VideoController extends Controller
     //
     private $db_video;
 
+
+
+    /**
+     * Create a new instance of the class.
+     *
+     * This constructor initializes the `$db_video` property with the name of the database table used for storing video data.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->db_video = "videos";
     }
 
-    // View all Gallery Video Function
+
+
+    /**
+     * Display a view of the video gallery.
+     *
+     * This method retrieves all video records from the `videos` table in the database, ordered by ID in descending order, and returns a view with the video data.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Video_Gallery()
     {
 
@@ -25,7 +42,16 @@ class VideoController extends Controller
         return view('Backend.gallery.video.video', compact('video'));
     }
 
-    // Store Video Function
+
+
+    /**
+     * Store a new video entry in the database.
+     *
+     * This method retrieves video data from the request, constructs an array with the data, and inserts it into the `videos` table in the database. It then redirects the user to the video gallery page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Store_Video(Request $request)
     {
 
@@ -43,7 +69,16 @@ class VideoController extends Controller
         return redirect()->route('video.gallery')->with($notification);
     }
 
-    // Video Edit Function
+
+
+    /**
+     * Display the form to edit a specific video entry.
+     *
+     * This method retrieves the video data for the given ID from the database and returns a view with the video data for editing.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function Video_Edit($id)
     {
 
@@ -51,7 +86,17 @@ class VideoController extends Controller
         return view('Backend.gallery.video.update', compact('edit_video'));
     }
 
-    // Video Update Function
+
+
+    /**
+     * Update an existing video entry in the database.
+     *
+     * This method retrieves updated video data from the request, constructs an array with the data, and updates the corresponding video record in the database based on the provided ID. It then redirects the user to the video gallery page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Video_Update(Request $request, $id)
     {
 
@@ -70,7 +115,16 @@ class VideoController extends Controller
     }
 
 
-    // Video Delete Function
+
+    /**
+     * Delete a specific video entry from the database.
+     *
+     * This method deletes the video record identified by the provided ID from the database. It then redirects the user to the video gallery page with a success notification.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
     public function Video_Delete($id)
     {
 

@@ -12,62 +12,92 @@ class NoticesController extends Controller
     //
     private $db_notices;
 
+
+
+    /**
+     * Constructor to initialize class properties.
+     */
     public function __construct()
     {
+        // Initialize the database table name for notices
         $this->db_notices = "notices";
     }
 
-    // Notice View Function
+
+
     public function Notice()
     {
-
+        // Fetch the first notice from the notices table
         $notice = DB::table($this->db_notices)->first();
 
-        if ($notice == Null) {
-
+        // Check if there is no existing notice
+        if ($notice == null) {
+            // Return the view to create a new notice
             return view('Backend.setting.notices.create');
         } else {
-
+            // Return the view to update the existing notice
             return view('Backend.setting.notices.update', compact('notice'));
         }
     }
 
-    // Notice Store Function
+
+
     public function Notice_Store(Request $request)
     {
+        try {
+            // Validate the incoming request data
+            $request->validate([
+                'notice_bn' => 'required',
+                'notice_en' => 'required',
+            ]);
 
-        $validate = $request->validate([
+            // Prepare the data for insertion
+            $data = array();
+            $data['notice_bn'] = $request->notice_bn;
+            $data['notice_en'] = $request->notice_en;
+            $data['status'] = $request->status;
+            $data['created_at'] = Carbon::now();
 
-            'notice_bn' => 'required',
-            'notice_en' => 'required'
+            // Insert data into the database
+            DB::table($this->db_notices)->insert($data);
 
-        ]);
-
-        $data = array();
-        $data['notice_bn'] = $request->notice_bn;
-        $data['notice_en'] = $request->notice_en;
-        $data['status'] = $request->status;
-        $data['created_at'] = Carbon::now();
-
-        DB::table($this->db_notices)->insert($data);
-
-        $notification = array('messege' => 'Notice Create Successfully!', 'alert-type' => 'success');
-        return redirect()->route('notice')->with($notification);
+            // Redirect with a success notification
+            $notification = array('messege' => 'Notice Created Successfully!', 'alert-type' => 'success');
+            return redirect()->route('notice')->with($notification);
+        } catch (\Exception $e) {
+            // Handle any errors that occur during insertion
+            $notification = array('messege' => 'An error occurred: ' . $e->getMessage(), 'alert-type' => 'error');
+            return redirect()->route('notice')->with($notification);
+        }
     }
 
-    // Notice Update Function
+
     public function Notice_Update(Request $request, $id)
     {
+        try {
+            // Validate the incoming request data
+            $request->validate([
+                'notice_bn' => 'required',
+                'notice_en' => 'required',
+            ]);
 
-        $data = array();
-        $data['notice_bn'] = $request->notice_bn;
-        $data['notice_en'] = $request->notice_en;
-        $data['status'] = $request->status;
-        $data['updated_at'] = Carbon::now();
+            // Prepare the data for updating
+            $data = array();
+            $data['notice_bn'] = $request->notice_bn;
+            $data['notice_en'] = $request->notice_en;
+            $data['status'] = $request->status;
+            $data['updated_at'] = Carbon::now();
 
-        DB::table($this->db_notices)->where('id', $id)->update($data);
+            // Update the record in the database
+            DB::table($this->db_notices)->where('id', $id)->update($data);
 
-        $notification = array('messege' => 'Notice Update Successfully!', 'alert-type' => 'success');
-        return redirect()->route('notice')->with($notification);
+            // Redirect with a success notification
+            $notification = array('messege' => 'Notice Updated Successfully!', 'alert-type' => 'success');
+            return redirect()->route('notice')->with($notification);
+        } catch (\Exception $e) {
+            // Handle any errors that occur during the update
+            $notification = array('messege' => 'An error occurred: ' . $e->getMessage(), 'alert-type' => 'error');
+            return redirect()->route('notice')->with($notification);
+        }
     }
 }

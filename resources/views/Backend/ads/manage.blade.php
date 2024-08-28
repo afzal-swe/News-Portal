@@ -54,8 +54,8 @@
                     </td>
                     
                     <td >
-                      <a href="#" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
-                      <a href="{{ route('ads.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
+                      <a href="{{ route('ads.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ route('ads.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="bi bi-archive"></i></a>
                   </td>
                   </tr>
                   @endforeach
@@ -90,17 +90,17 @@
                     @csrf
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Ads Link</label>
-                      <input type="text" class="form-control @error('link') is-invalid @enderror" name="link" placeholder=" Ads Link">
+                      <input type="text" class="form-control" name="link" placeholder=" Ads Link">
                         @error('link')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Ads</label>
-                      <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                      <input type="file" class="form-control" name="image">
                       @error('image')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 

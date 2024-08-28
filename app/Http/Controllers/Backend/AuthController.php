@@ -44,12 +44,10 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             "email" => 'required|email|exists:users',
             "password" => 'required',
+        ], [
+            "email.required" => "This email is required",
+            "password.required" => "This password is required",
         ]);
-
-        // If validation fails, return error response
-        if ($validator->fails()) {
-            return Response(['message' => $validator->errors()], 401);
-        }
 
         // Attempt to authenticate the user
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {

@@ -50,8 +50,9 @@
                         @endif
                     </td>
                     <td >
-                      <a href="{{ route('photos.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
-                      <a href="{{ route('gallery.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
+          
+                      <a href="{{ route('photos.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ route('gallery.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="bi bi-archive"></i></a>
                   </td>
                   </tr>
                   @endforeach
@@ -89,32 +90,38 @@
                     @csrf
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Title BN</label>
-                      <input type="text" class="form-control @error('title_bn') is-invalid @enderror" name="title_bn" placeholder="Title BN" required>
+                      <input type="text" class="form-control" name="title_bn" placeholder="Title BN">
                         @error('title_bn')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Title EN</label>
-                      <input type="text" class="form-control @error('title_en') is-invalid @enderror" name="title_en" placeholder="Title EN" required>
+                      <input type="text" class="form-control" name="title_en" placeholder="Title EN">
                         @error('title_en')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Photo</label>
-                      <input type="file" class="form-control" name="photo" required>
+                      <input type="file" class="form-control" name="photo">
+                      @error('photo')
+                          <div class="text-danger">{{ $message }}</div>
+                      @enderror
                     </div>
 
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Type</label>
-                      <select name="type" id="" class="form-control" required>
+                      <select name="type" id="" class="form-control">
                         <option selected disabled>==Select Option==</option>
                         <option value="0">Small Photo</option>
                         <option value="1">Big Photo</option>
                       </select>
+                      @error('type')
+                          <div class="text-danger">{{ $message }}</div>
+                      @enderror
                     </div>
 
                     

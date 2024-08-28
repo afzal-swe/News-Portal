@@ -64,14 +64,20 @@
                       <label for="yourUsername" class="form-label">E-mail</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="email" class="form-control"  required>
+                        <input type="text" name="email" class="form-control">
+                        @error('email')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         <div class="invalid-feedback">Please enter your email.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" required>
+                      <input type="password" name="password" class="form-control">
+                      @error('password')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 

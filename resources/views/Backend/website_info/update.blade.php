@@ -78,7 +78,7 @@
                 <label for="inputText" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
                     <img src="{{ asset($website_update->logo) }}" alt="" style="height: 180px; width:290px;">
-                    <input type="hidden" name="oldimage" value="{{ $website_update->logo }}">
+                    
                 </div>
               </div><br>
 

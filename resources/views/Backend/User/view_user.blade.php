@@ -65,8 +65,8 @@
                         @endif
                     </td>
                     <td >
-                      <a href="#" class="btn btn-info sm" title="Edit Data"><i class="fa-edit"></i></a>
-                      <a href="#" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="bxs-trash"></i></a>
+                      <a href="#" class="btn btn-info sm" title="Edit Data"><i class="bi bi-pencil-square"></i></a>
+                      <a href="#" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="bi bi-archive"></i></a>
                   </td>
                   </tr>
                   @endforeach

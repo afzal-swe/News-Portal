@@ -14,12 +14,30 @@ class SubcategoryController extends Controller
     private $db_subcategory;
     private $db_category;
 
+
+
+    /**
+     * Create a new instance of the class.
+     *
+     * This constructor initializes the `$db_category` and `$db_subcategory` properties with the names of the database tables used for storing categories and subcategories, respectively.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->db_category = "categories";
         $this->db_subcategory = "subcategory";
     }
 
+
+
+    /**
+     * Display a view of subcategories and categories.
+     *
+     * This method retrieves a list of subcategories joined with their corresponding categories from the database. It also retrieves a list of all categories. The method then returns a view with the retrieved subcategories and categories data.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Subategory_View()
     {
         $sub_category = DB::table($this->db_subcategory)
@@ -30,9 +48,19 @@ class SubcategoryController extends Controller
         return view('Backend.subcategory.view_subcategory', compact('sub_category', 'category'));
     }
 
+
+
+
+    /**
+     * Create a new subcategory and store it in the database.
+     *
+     * This method validates the request data, constructs an array of the validated data, and inserts it into the subcategory table in the database. It then redirects the user to the subcategory view page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Create_Subcategory(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             "category_id" => "required",
             "subcategory_bn" => "required",
@@ -52,7 +80,18 @@ class SubcategoryController extends Controller
         return redirect()->route('Subategory_View')->with($notification);
     }
 
-    // Edit sub category function
+
+
+
+
+    /**
+     * Display the edit form for a specific subcategory.
+     *
+     * This method retrieves the subcategory data for the given ID from the database and also retrieves all categories. It then returns a view with the subcategory data and category list for editing.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
     public function Subcategory_Edit($id)
     {
 
@@ -61,7 +100,17 @@ class SubcategoryController extends Controller
         return view('Backend.subcategory.edit_subcategory', compact('edit', 'category'));
     }
 
-    // Update subcategory function
+
+
+
+    /**
+     * Update an existing subcategory in the database.
+     *
+     * This method retrieves updated subcategory data from the request, constructs an array of this data, and updates the corresponding subcategory record in the database based on the provided ID. It then redirects the user to the subcategory view page with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Update_Subcategory(Request $request)
     {
 
@@ -78,8 +127,18 @@ class SubcategoryController extends Controller
         return redirect()->route('Subategory_View')->with($notification);
     }
 
-    // Delete Sub Category function
 
+
+
+
+    /**
+     * Delete a specific subcategory from the database.
+     *
+     * This method deletes the subcategory record identified by the provided ID from the database. It then redirects the user to the subcategory view page with a success notification.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Subcategory_Delete($id)
     {
 

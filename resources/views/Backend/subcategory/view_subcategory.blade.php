@@ -51,8 +51,9 @@
                         @endif
                     </td>
                     <td >
-                      <a href="{{ route('subcategory.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fa fa-edit"></i></a>
-                      <a href="{{ route('subcategory.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fa fa-trash"></i></a>
+                      
+                      <a href="{{ route('subcategory.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ route('subcategory.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="bi bi-archive"></i></a>
                   </td>
                   </tr>
                   @endforeach
