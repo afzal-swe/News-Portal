@@ -89,4 +89,85 @@ class UserController extends Controller
         $notification = array('messege' => 'Services Create Successfully!', 'alert-type' => 'success');
         return redirect()->route('view_user')->with($notification);
     }
+
+
+
+
+
+    /**
+     * Display the form to edit a specific user.
+     *
+     * This method retrieves the user's details by their ID and fetches all active roles or permissions. 
+     * It then returns the view for editing the user's information, passing the user details and permissions to the view.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
+    public function User_Edit($id)
+    {
+
+        $user_edit = DB::table($this->db_tableUser)->where('id', $id)->first();
+        $parmission = DB::table($this->db_role)->where('status', 1)->orderBy('id', 'DESC')->get();
+        return view('Backend.User.edit_user', compact('user_edit', 'parmission'));
+    }
+
+
+
+
+
+
+
+
+    /**
+     * Update a user's information.
+     *
+     * This method updates the specified user's details in the 'users' table, including their name, username, status,
+     * phone number, and address. After the update, it redirects to the 'view_user' route with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function User_Update(Request $request)
+    {
+
+        $user_id = $request->id;
+
+
+        DB::table($this->db_tableUser)->where('id', $user_id)->update([
+            'name' => $request->name,
+            'user_name' => $request->user_name,
+            'status' => $request->status,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+
+        $notification = array('messege' => 'User Update Successfully!', 'alert-type' => 'success');
+        return redirect()->route('view_user')->with($notification);
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Delete a specific user.
+     *
+     * This method deletes the user with the specified ID from the 'users' table. After deletion, it redirects to
+     * the 'view_user' route with a success notification.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function User_Delete($id)
+    {
+
+        DB::table($this->db_tableUser)->where('id', $id)->delete();
+        $notification = array('messege' => 'Delete Successfully!', 'alert-type' => 'success');
+        return redirect()->route('view_user')->with($notification);
+    }
 }

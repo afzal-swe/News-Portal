@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 31, 2024 at 06:19 AM
+-- Generation Time: Sep 03, 2024 at 01:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.30
 
@@ -76,7 +76,8 @@ INSERT INTO `categories` (`id`, `category_bn`, `category_en`, `slug`, `soft_dele
 (18, 'বিনোদন', 'Entertainment', 'binodn', '0', '1', '2024-07-17 03:42:17', NULL),
 (19, 'চাকরি', 'Job', 'cakri', '0', '1', '2024-07-17 03:42:32', NULL),
 (20, 'জীবনযাপন', 'Lifestyle', 'jeebnzapn', '0', '1', '2024-07-17 03:43:06', NULL),
-(22, 'আন্তর্জাতিক', 'International', 'antrjatik', '0', '1', '2024-07-18 13:42:34', NULL);
+(22, 'আন্তর্জাতিক', 'International', 'antrjatik', '0', '1', '2024-07-18 13:42:34', NULL),
+(25, 'test', 'test', 'test', '0', NULL, '2024-08-27 18:01:34', '2024-08-27 18:02:47');
 
 -- --------------------------------------------------------
 
@@ -181,7 +182,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (21, '2024_07_26_004453_create_photos_table', 12),
 (22, '2024_07_26_210701_create_videos_table', 12),
 (23, '2024_07_30_223152_create_ads_table', 13),
-(25, '2024_07_31_040600_create_settings_table', 14);
+(25, '2024_07_31_040600_create_settings_table', 14),
+(26, '2024_09_03_124357_create_social_table', 15);
 
 -- --------------------------------------------------------
 
@@ -203,7 +205,7 @@ CREATE TABLE `notices` (
 --
 
 INSERT INTO `notices` (`id`, `notice_bn`, `notice_en`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'aaaaaaaaaa', 'bbbbbbbbbb', NULL, '2024-07-25 17:26:02', '2024-07-28 09:54:35');
+(1, 'aaaaaaaaaasdaf', 'bbbbbbbbbbsadf', 1, '2024-07-25 17:26:02', '2024-08-28 02:07:32');
 
 -- --------------------------------------------------------
 
@@ -445,7 +447,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `logo`, `wname_bn`, `wname_en`, `address_bn`, `address_en`, `phone_bn`, `phone_en`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'images/setting/66a9ce2a6f3a3.png', 'ভোলা নিউজ', 'Bhola News', 'বনশ্রী ব্লক-বি, রোড-৫, বাড়ি-২১ ঢাকা', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', '01811178307', 'afzalbhola07@gmail.com', '2024-07-31 00:11:20', NULL);
+(2, 'images/setting/66cef5a361e26.png', 'ভোলা নিউজ', 'Bhola News', 'Banasree Block-B, Road-5, House-21 Dhaka', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', '01811178307', 'afzalbhola07@gmail.com', '2024-08-28 04:02:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -619,11 +621,22 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `user_name`, `email`, `phone`, `address`, `parmission`, `status`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(8, 'Md.Afzal Hossen', 'afzal-swe', 'afzal@gmail.com', '01811178307', 'asdfa sad', '1', '1', NULL, '$2y$10$t3ZZAOBG.EY5CBPusKdgSOf5H7HrjbkYdu2.9kHMVdYmY.PPnV0da', NULL, NULL, NULL),
-(9, 'Md.Afzal Hossen', NULL, 'test@example.com', NULL, NULL, NULL, '0', NULL, '$2y$10$wxzMRRrV/X.waVWihK6fw.AP4X8leUTPnzF.Ge6J28dCmsIJHQ7uy', NULL, '2024-06-02 02:17:39', '2024-06-02 02:17:39'),
-(10, 'Shathi', NULL, 'sathi@gmail.com', NULL, NULL, NULL, '0', NULL, '$2y$10$t3ZZAOBG.EY5CBPusKdgSOf5H7HrjbkYdu2.9kHMVdYmY.PPnV0da', NULL, '2024-07-09 05:54:05', '2024-07-09 05:54:05'),
-(11, 'testimonials', NULL, 'afzaaal@gmail.com', NULL, NULL, NULL, '0', NULL, '$2y$10$/pkKt549jIDcnzQh746YB.pWlr52LmOP1rWuN2HIvmOmmYa7YpaHG', NULL, '2024-07-16 14:08:44', '2024-07-16 14:08:44'),
-(12, 'Md.Afzal Hossen', 'afzal', 'afzalbhola07@gmail.com', '01811178307', 'Banasree Block-B, Road-5, House-21 Dhaka', '3', '1', NULL, '$2y$10$ukygt.ini67M9szv2qYeT.RM1NFzO7x3qes2jB.JfEl/Gm1RIjKrS', NULL, NULL, NULL);
+(8, 'Md.Afzal Hossen', 'afzal-swe', 'afzal@gmail.com', '01811178307', 'Banasree Block-B, Road-5, House-21 Dhaka', '1', '1', NULL, '$2y$10$t3ZZAOBG.EY5CBPusKdgSOf5H7HrjbkYdu2.9kHMVdYmY.PPnV0da', NULL, NULL, NULL),
+(11, 'afzal', 'afzal', 'afzaaal@gmail.com', '01811178307', 'Banasree Block-B, Road-5, House-21 Dhaka', NULL, '1', NULL, '$2y$10$/pkKt549jIDcnzQh746YB.pWlr52LmOP1rWuN2HIvmOmmYa7YpaHG', NULL, '2024-07-16 14:08:44', '2024-07-16 14:08:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_socials`
+--
+
+CREATE TABLE `user_socials` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -800,6 +813,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `user_socials`
+--
+ALTER TABLE `user_socials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `videos`
 --
 ALTER TABLE `videos`
@@ -819,19 +838,19 @@ ALTER TABLE `websites`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `districts`
 --
 ALTER TABLE `districts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -849,7 +868,7 @@ ALTER TABLE `livetv`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `notices`
@@ -867,7 +886,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -897,7 +916,7 @@ ALTER TABLE `seos`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `socials`
@@ -909,7 +928,7 @@ ALTER TABLE `socials`
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `sub_districts`
@@ -921,7 +940,13 @@ ALTER TABLE `sub_districts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `user_socials`
+--
+ALTER TABLE `user_socials`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `videos`

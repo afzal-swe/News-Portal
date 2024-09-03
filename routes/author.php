@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\AdsController;
 use App\Http\Controllers\Backend\SettingsController;
+use App\Http\Controllers\Backend\ProfileController;
 
 
 // Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -49,9 +50,12 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/all', 'view_user')->name('view_user');
                 Route::get('/create', 'Create_user')->name('Create_user');
                 Route::post('/store', 'store_user')->name('store_user');
-                // Route::get('/edit/{id}', 'edit_brand')->name('brand.edit');
-                // Route::post('/update/{id}', 'brand_update')->name('brand.update');
-                // Route::get('/delete/{id}', 'Brand_Delete')->name('brand.delete');
+                Route::get('/edit/{id}', 'User_Edit')->name('user.edit');
+                Route::post('/update', 'User_Update')->name('user.update');
+                Route::get('/delete/{id}', 'User_Delete')->name('user.delete');
+            });
+            Route::controller(ProfileController::class)->group(function () {
+                Route::get('/profile', 'User_Profile')->name('user.profile');
             });
         });
 
