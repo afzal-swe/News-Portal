@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-xs-6 col-md-2 col-sm-4">
                 <div class="header_logo">
-                    <a href=""><img src="{{ asset ($logo->logo)}}"></a> 
+                    <a href="{{ route('home_page') }}"><img src="{{ asset ($logo->logo)}}"></a> 
                 </div>
             </div>              
             <div class="col-xs-6 col-md-8 col-sm-8">
